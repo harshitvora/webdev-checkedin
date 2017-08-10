@@ -1,0 +1,128 @@
+.hv-navbar-blue{
+    background-color: #428bca;
+    border-color: #428bca;
+}
+
+a:hover{
+    text-decoration: none;
+}
+
+.hv-navbar-black{
+    background-color: rgba(0, 0, 0, 0.7);
+    border-color: black;
+}
+
+.navbar-default .hv-text-white {
+    color: white;
+}
+
+.navbar-default .hv-text-white {
+    color: white;
+}
+
+.navbar-default .hv-text-white > a {
+    color: white;
+    text-decoration: none;
+}
+
+.navbar-default .navbar-brand:hover,
+.navbar-default .navbar-brand:focus {
+    background-color: transparent;
+    color: white;
+}
+
+.hv-icon-white{
+    color: white;
+}
+
+.hv-icon-black{
+    color: black;
+}
+
+.hv-header{
+    background: url("../../vendor/img/header.jpg") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.nav.navbar-default{
+    margin: auto;
+}
+#line{
+    border-right: solid 1px black;
+}
+input{
+    margin-bottom: 5px;
+}
+
+body{
+    padding-top: 60px;
+}
+
+.hv-widget{
+    position: relative;
+}
+
+.hv-floating-icons{
+    position: absolute;
+    background-color: white;
+    z-index: +2;
+    right: 0px;
+    border-radius: 5px;
+    padding: 3px;
+}
+
+.hv-youtube-wrapper {
+    position: relative;
+    padding-bottom: 56.25%;
+    padding-top: 5px;
+    height: 0;
+}
+.hv-youtube-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.hv-overflow{
+    padding-top: 10px;
+    position: absolute;
+    top: 50px;
+    bottom: 50px;
+    overflow-y: scroll;
+}
+
+.hv-container-overflow{
+    margin-bottom: 100px;
+}
+
+.hv-overflow-offset{
+    position: absolute;
+    right: 0px;
+    top: 60px;
+}
+
+.hv-avatar-container{
+    background-color:  rgba(0, 0, 0, 0.7);
+    text-align: center;
+    color: white;
+    margin-top: 6%;
+    margin-left: 35%;
+    margin-right: 35%;
+    border-radius: 25px;
+    padding: 3%;
+}
+
+.hv-avatar{
+    height: 16.67vw;
+    width: 16.67vw;
+    margin: auto;
+    border-radius: 50%;
+}
+
+.hv-widget-list {
+    padding: 0;
+    list-style-type: none;
+}
