@@ -107,8 +107,8 @@ function uploadImage(req, res) {
             user = response;
             user.pictureUrl = '/uploads/'+filename;
             userModel.updateUser(userId, user)
-                .then(function (widget) {
-                    console.log(widget);
+                .then(function (user) {
+                    console.log(user);
                 });
         });
 
