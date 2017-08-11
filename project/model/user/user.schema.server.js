@@ -12,7 +12,7 @@ var userSchema = mongoose.Schema({
     email: String,
     phone: String,
     pictureUrl: String,
-    // following: [{type: mongoose.Schema.Types.ObjectId, ref:'FollowModel'}],
+    following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
     // followers: [{type: mongoose.Schema.Types.ObjectId, ref:'FollowModel'}],
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});

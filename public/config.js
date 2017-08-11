@@ -17,14 +17,20 @@
                 templateUrl: "views/user/templates/register.view.client.html",
                 controller: "registerController",
                 controllerAs: "model"})
-            .when("/user/:uid", {
+            .when("/user", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "profileController",
-                controllerAs: "model"})
-            .when("/user/:uid/edit", {
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
+            .when("/user/edit", {
                 templateUrl: "views/user/templates/profile-edit.view.client.html",
                 controller: "profileEditController",
-                controllerAs: "model"})
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
             .when("/poc", {
                 templateUrl: "views/poc/search.view.client.html",
                 controller: "searchController",
@@ -33,5 +39,19 @@
                 templateUrl: "views/poc/detail.view.client.html",
                 controller: "detailController",
                 controllerAs: "model"})
+    }
+    
+    function loggedin(userService, $q, $location) {
+            var deferred = $q.defer();
+        userService.loggedin()
+            .then(function (user) {
+                    if(user === 0){
+                        deferred.reject();
+                        $location.url("/login");
+                    } else {
+                        deferred.resolve(user);
+                    }
+            });
+        return deferred.promise;
     }
 })();

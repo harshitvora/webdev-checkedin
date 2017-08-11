@@ -6,7 +6,7 @@
         .module("CheckedIn")
         .controller("profileEditController", profileEditController);
 
-    function profileEditController($routeParams, userService, $location, $rootScope) {
+    function profileEditController($routeParams, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -14,14 +14,14 @@
         model.deleteUser = deleteUser;
         model.logout = logout;
 
-        var userId = $routeParams["uid"];
+        var userId = user._id;
 
         function init() {
             userService.findUserByUserId(userId)
                 .then(function (response) {
                     model.user = response;
                 });
-            $rootScope.title = "Profile";
+            $rootScope.title = "Edit Profile";
         }
         init();
 
@@ -33,7 +33,7 @@
                     }
                     else{
                         model.successMessage = "Profile updated!";
-                        $location.url("/user/"+user._id);
+                        $location.url("/user");
                     }
                 });
         }

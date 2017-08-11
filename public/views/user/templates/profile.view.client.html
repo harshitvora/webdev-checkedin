@@ -39,12 +39,27 @@
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
             {{model.user.pictureUrl}}
-            <a href="#!/user/{{model.user._id}}/edit"
+            <a href="#!/user/edit"
                class="btn btn-primary btn-block">Edit Profile</a>
             <a href="#"
                class="btn btn-primary btn-block">Following</a>
         </div>
         <div id="show" class="col-md-8 col-xs-12"  style="background: red">
+
+            <form action="">
+                <div class="form-group">
+                    <label for="followId">Follow this user:</label>
+                    <input type="text"
+                           name="followId"
+                           id="followId"
+                           ng-model="followId"
+                           placeholder="follow id"
+                           class="form-control">
+                </div>
+                <a role="button" ng-click="model.followUser(followId)"
+                   class="btn btn-primary btn-block">Follow User</a>
+            </form>
+
             <div ng-include="'views/user/templates/follow.component.client.html'"></div>
         </div>
     </div>

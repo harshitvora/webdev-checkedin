@@ -15,7 +15,7 @@
         init();
 
         function login(user) {
-            userService.findUserByCredentials(user.username, user.password)
+            userService.login(user.username, user.password)
                 .then(function (response) {
                     var _user = response;
                     if(!_user){
@@ -23,7 +23,7 @@
                     }
                     else {
                         $rootScope.currentUser = _user;
-                        $location.url("user/"+_user._id);
+                        $location.url("user/");
                     }
                 });
 

@@ -10,7 +10,12 @@
             "findUserByUsername": findUserByUsername,
             "createUser": createUser,
             "updateUser": updateUser,
-            "deleteUser": deleteUser
+            "deleteUser": deleteUser,
+            "findFollowingForUser": findFollowingForUser,
+            "followUser": followUser,
+            "unfollowUser": unfollowUser,
+            "login": login,
+            "loggedin": loggedin
         };
         return api;
 
@@ -20,6 +25,22 @@
                 .then(function (response) {
                     return response.data;
                 });
+        }
+
+        function login(username, password) {
+            var url = "/api/login";
+            return $http.post(url, {username: username, password: password})
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function loggedin() {
+            return $http.get("/api/loggedin")
+                .then(function (response) {
+                    return response.data;
+                })
+
         }
 
         function findUserByUserId(userId) {
@@ -54,6 +75,28 @@
 
         function deleteUser(userId) {
             return $http.delete("/api/user/"+userId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findFollowingForUser(userId) {
+            return $http.get("/api/user/"+userId+"/following")
+                .then(function (response) {
+                    return response.data;
+                });
+
+        }
+
+        function followUser(userId, followId) {
+            return $http.post("/api/user/"+userId+"/following/"+followId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function unfollowUser(userId, followId) {
+            return $http.delete("/api/user/"+userId+"/following/"+followId)
                 .then(function (response) {
                     return response.data;
                 });

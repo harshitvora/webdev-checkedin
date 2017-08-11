@@ -14,8 +14,9 @@ userModel.findUserByCredentials = findUserByCredentials;
 userModel.getAllUsers = getAllUsers;
 userModel.updateUser = updateUser;
 userModel.deleteUser = deleteUser;
-// userModel.addWebsite = addWebsite;
-// userModel.removeWebsite = removeWebsite;
+userModel.followUser = followUser;
+userModel.unfollowUser = unfollowUser;
+userModel.findFollowingForUser = findFollowingForUser;
 module.exports = userModel;
 
 function createUser(user) {
@@ -23,8 +24,12 @@ function createUser(user) {
 }
 
 function findUserById(id) {
-    return userModel.findById(id)
-        .populate('websites')
+    return userModel.findById(id);
+}
+
+function findFollowingForUser(userId) {
+    return userModel.findById(userId)
+        .populate('following')
         .exec();
 }
 
@@ -48,29 +53,27 @@ function deleteUser(userId) {
     return userModel
         .findById(userId)
         .then(function (user) {
-            var index = user.websites;
-            console.log(index);
             return userModel.remove({_id: userId});
         });
 }
 
 
 
-// function addWebsite(userId, websiteId) {
-//     return userModel
-//         .findById(userId)
-//         .then(function (user) {
-//             user.websites.push(websiteId);
-//             return user.save();
-//         })
-// }
-//
-// function removeWebsite(userId, websiteId) {
-//     return userModel
-//         .findById(userId)
-//         .then(function (user) {
-//             var index = user.websites.indexOf(websiteId);
-//             user.websites.splice(index, 1);
-//             return user.save();
-//         })
-// }
+function followUser(userId, followId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            user.following.push(followId);
+            return user.save();
+        })
+}
+
+function unfollowUser(userId, followId) {
+    return userModel
+        .findById(userId)
+        .then(function (user) {
+            var index = user.following.indexOf(followId);
+            user.following.splice(index, 1);
+            return user.save();
+        })
+}
