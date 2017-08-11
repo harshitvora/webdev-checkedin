@@ -15,7 +15,8 @@
             "followUser": followUser,
             "unfollowUser": unfollowUser,
             "login": login,
-            "loggedin": loggedin
+            "loggedin": loggedin,
+            "logout": logout
         };
         return api;
 
@@ -41,6 +42,13 @@
                     return response.data;
                 })
 
+        }
+
+        function logout() {
+            return $http.delete("/api/logout")
+                .then(function (response) {
+                    return response.data;
+                })
         }
 
         function findUserByUserId(userId) {

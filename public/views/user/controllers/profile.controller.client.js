@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("profileController", profileController);
 
-    function profileController($routeParams, userService, $location, $rootScope, user) {
+    function profileController($routeParams, userService, $location, $rootScope) {
         var model = this;
 
         //Event handles:
@@ -11,18 +11,35 @@
         model.followUser = followUser;
         model.unfollowUser = unfollowUser;
 
-        var userId = user._id;
+
+
+        var userId = $routeParams["uid"];
+
+        var currentUser;
+        model.followed = false;
+        userService.loggedin()
+            .then(function (user) {
+                if(user == 0){
+                    currentUser = null;
+                } else {
+                    currentUser = user;
+                    if(currentUser.following.includes(userId)){
+                        model.followed = true;
+                    }
+                }
+            });
 
         function init() {
             userService.findUserByUserId(userId)
                 .then(function (response) {
                     model.user = response;
+                    $rootScope.title = response.username+"'s profile";
                 });
-            $rootScope.title = "Profile";
-            userService.findFollowingForUser(userId)
-                .then(function (response) {
-                    model.following = response;
-                });
+
+            // userService.findFollowingForUser(userId)
+            //     .then(function (response) {
+            //         model.following = response;
+            //     });
         }
         init();
 
@@ -30,23 +47,29 @@
             if($rootScope.currentUser){
                 delete $rootScope.currentUser;
             }
-            $location.url("/login");
-        }
-
-        function followUser(followId) {
-            userService.followUser(userId, followId)
+            userService.logout()
                 .then(function (response) {
-                    console.log(response);
-                    $location.url("/user/"+userId+"/");
+                    $location.url("/login");
                 });
-
         }
 
-        function unfollowUser(followId) {
-            userService.unfollowUser(userId, followId)
+        function followUser() {
+            if(!currentUser){
+                alert("Login to perform this action!");
+            } else {
+                userService.followUser(currentUser._id, userId)
+                    .then(function (response) {
+                        console.log(response);
+                        model.followed = true;
+                    });
+            }
+        }
+
+        function unfollowUser() {
+            userService.unfollowUser(currentUser._id, userId)
                 .then(function (response) {
                     console.log(response);
-                    $location.url("/user/"+userId+"/");
+                    model.followed = false;
                 });
 
         }

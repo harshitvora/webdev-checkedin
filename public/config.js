@@ -18,19 +18,23 @@
                 controller: "registerController",
                 controllerAs: "model"})
             .when("/user", {
-                templateUrl: "views/user/templates/profile.view.client.html",
-                controller: "profileController",
+                templateUrl: "views/user/templates/user.view.client.html",
+                controller: "userController",
                 controllerAs: "model",
                 resolve:{
                     user: loggedin
                 }})
             .when("/user/edit", {
-                templateUrl: "views/user/templates/profile-edit.view.client.html",
-                controller: "profileEditController",
+                templateUrl: "views/user/templates/user-edit.view.client.html",
+                controller: "userEditController",
                 controllerAs: "model",
                 resolve:{
                     user: loggedin
                 }})
+            .when("/user/:uid", {
+                templateUrl: "views/user/templates/profile.view.client.html",
+                controller: "profileController",
+                controllerAs: "model"})
             .when("/poc", {
                 templateUrl: "views/poc/search.view.client.html",
                 controller: "searchController",
@@ -40,17 +44,17 @@
                 controller: "detailController",
                 controllerAs: "model"})
     }
-    
+
     function loggedin(userService, $q, $location) {
-            var deferred = $q.defer();
+        var deferred = $q.defer();
         userService.loggedin()
             .then(function (user) {
-                    if(user === 0){
-                        deferred.reject();
-                        $location.url("/login");
-                    } else {
-                        deferred.resolve(user);
-                    }
+                if(user == 0){
+                    deferred.reject();
+                    $location.url("/login");
+                } else {
+                    deferred.resolve(user);
+                }
             });
         return deferred.promise;
     }

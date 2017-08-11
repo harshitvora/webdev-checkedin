@@ -20,6 +20,8 @@ app.post("/api/user/:userId/following/:followId", followUser);
 app.get("/api/user", findUserByCredentials);
 app.post("/api/login", passport.authenticate('local'), login);
 app.get("/api/loggedin", loggedin);
+app.delete("/api/logout", logout);
+
 app.post("/api/user", createUser);
 app.delete("/api/user/:userId", deleteUser);
 app.delete("/api/user/:userId/following/:followId", unfollowUser);
@@ -127,7 +129,7 @@ function login(req, res) {
 
 function logout(req, res) {
     req.logOut();
-    res.send(200);
+    res.sendStatus(200);
 }
 
 function loggedin(req, res) {

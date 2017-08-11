@@ -14,7 +14,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="#!/">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li><a href="#!/user">Profile</a></li>
+                <li class="active"><a href="#">Profile</a></li>
                 <li><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -22,38 +22,30 @@
 </nav>
 
 <!--<div class="navbar navbar-default navbar-fixed-top hv-navbar-blue">-->
-<!--<div class="container-fluid">-->
-<!--<p class="navbar-text pull-left">-->
-<!--<a href="#"><span class="glyphicon glyphicon-chevron-left pull-left hv-icon-white"></span></a>-->
-<!--</p>-->
-<!--<div class="navbar-brand hv-text-white">Profile</div>-->
-<!--<p class="navbar-text pull-right">-->
-<!--<a role="button" ng-click="model.updateUser(model.user)"><span class="glyphicon glyphicon-ok pull-right hv-icon-white"></span></a>-->
-<!--</p>-->
+    <!--<div class="container-fluid">-->
+        <!--<p class="navbar-text pull-left">-->
+            <!--<a href="#"><span class="glyphicon glyphicon-chevron-left pull-left hv-icon-white"></span></a>-->
+        <!--</p>-->
+        <!--<div class="navbar-brand hv-text-white">Profile</div>-->
+        <!--<p class="navbar-text pull-right">-->
+            <!--<a role="button" ng-click="model.updateUser(model.user)"><span class="glyphicon glyphicon-ok pull-right hv-icon-white"></span></a>-->
+        <!--</p>-->
+    <!--</div>-->
 <!--</div>-->
-<!--</div>-->
-<div class="container-fluid">
+<div class="container-fluid" style="background: pink">
     <div class="row">
-        <div id="hide" class="col-md-4 col-xs-12">
+        <div id="hide" class="col-md-4 col-xs-12" style="background: blue">
             <h1>Profile</h1>
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
             {{model.user.pictureUrl}}
-            <div ng-switch="model.followed">
-                <a ng-switch-when="false" role="button" ng-click="model.followUser()"
-                   class="btn btn-primary btn-block">Follow User</a>
-                <a ng-switch-when="true" role="button" ng-click="model.unfollowUser()"
-                   class="btn btn-danger btn-block">Unfollow User</a>
-                </div>
-            </div>
-
-
-
+            <a href="#!/user/edit"
+               class="btn btn-primary btn-block">Edit Profile</a>
+            <a href="#"
+               class="btn btn-primary btn-block">Following</a>
         </div>
-        <div id="show" class="col-md-8 col-xs-12">
-
-            Posts / activity
-            <!--<div ng-include="'views/user/templates/follow.component.client.html'"></div>-->
+        <div id="show" class="col-md-8 col-xs-12"  style="background: red">
+            <div ng-include="'views/user/templates/follow.component.client.html'"></div>
         </div>
     </div>
 </div>

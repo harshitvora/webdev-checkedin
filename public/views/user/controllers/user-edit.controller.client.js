@@ -4,9 +4,9 @@
 (function () {
     angular
         .module("CheckedIn")
-        .controller("profileEditController", profileEditController);
+        .controller("userEditController", userEditController);
 
-    function profileEditController($routeParams, userService, $location, $rootScope, user) {
+    function userEditController($routeParams, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
