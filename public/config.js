@@ -35,12 +35,12 @@
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model"})
-            .when("/poc", {
-                templateUrl: "views/poc/search.view.client.html",
+            .when("/search", {
+                templateUrl: "views/home/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model"})
-            .when("/poc/venue/:vid", {
-                templateUrl: "views/poc/detail.view.client.html",
+            .when("/search/venue/:vid", {
+                templateUrl: "views/home/detail.view.client.html",
                 controller: "detailController",
                 controllerAs: "model"})
     }

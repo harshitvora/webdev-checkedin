@@ -38,7 +38,7 @@
             <h1>Profile</h1>
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
-            {{model.user.pictureUrl}}
+            <img src="{{model.user.pictureUrl}}">
             <div ng-switch="model.followed">
                 <a ng-switch-when="false" role="button" ng-click="model.followUser()"
                    class="btn btn-primary btn-block">Follow User</a>
@@ -46,9 +46,6 @@
                    class="btn btn-danger btn-block">Unfollow User</a>
                 </div>
             </div>
-
-
-
         </div>
         <div id="show" class="col-md-8 col-xs-12">
 

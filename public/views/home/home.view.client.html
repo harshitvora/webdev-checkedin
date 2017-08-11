@@ -26,10 +26,17 @@
             <br>
             <div class="jumbotron">
                 <h1>CheckedIn</h1>
-                <p ng-show="currentUser">Hi, {{currentUser.username}}!
-                <p ng-show="currentUser">Here's your <a href="#!/user/{{currentUser._id}}"><b>profile</b></a></p>
-                <p ng-show="!currentUser">This is a Website to check out places and events.</p>
-                <p ng-show="!currentUser"><a href="#!/login"><b>Login</b></a> to begin!</p>
+                <!--<p ng-show="model.currentUser">Hi, {{model.currentUser.username}}!-->
+                <!--<p ng-show="model.currentUser">Here's your <a href="#!/user/{{model.currentUser._id}}"><b>profile</b></a></p>-->
+                <p>This is a Website to check out places and events.</p>
+                <a href="#!/search">Search for place</a>
+                    <!--<h2>Search venue by place</h2>-->
+                    <!--<input type="text" placeholder="What are you looking for?" ng-model="name" class="form-control">-->
+                    <!--<input type="text" placeholder="Where are you looking?" ng-model="location" class="form-control">-->
+                    <!--<a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByName(location, name)">Search</a>-->
+                    <!--<h2>OR</h2>-->
+                    <!--<h2>Search venues by your location</h2>-->
+                    <!--<a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByLocation()">Find places around me</a>-->
             </div>
             </form>
         </div>

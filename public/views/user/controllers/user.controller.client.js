@@ -26,9 +26,6 @@
         init();
 
         function logout() {
-            if($rootScope.currentUser){
-                delete $rootScope.currentUser;
-            }
             userService.logout()
                 .then(function (response) {
                     $location.url("/login");

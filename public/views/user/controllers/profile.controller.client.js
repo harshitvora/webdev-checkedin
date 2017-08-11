@@ -14,39 +14,35 @@
 
 
         var userId = $routeParams["uid"];
-
         var currentUser;
-        model.followed = false;
-        userService.loggedin()
-            .then(function (user) {
-                if(user == 0){
-                    currentUser = null;
-                } else {
-                    currentUser = user;
-                    if(currentUser.following.includes(userId)){
-                        model.followed = true;
-                    }
-                }
-            });
+
+
 
         function init() {
+
+
+            model.followed = false;
+            userService.loggedin()
+                .then(function (user) {
+                    if(user == 0){
+                        currentUser = null;
+                    } else {
+                        currentUser = user;
+                        if(currentUser.following.includes(userId)){
+                            model.followed = true;
+                        }
+                    }
+                });
+
             userService.findUserByUserId(userId)
                 .then(function (response) {
                     model.user = response;
                     $rootScope.title = response.username+"'s profile";
                 });
-
-            // userService.findFollowingForUser(userId)
-            //     .then(function (response) {
-            //         model.following = response;
-            //     });
         }
         init();
 
         function logout() {
-            if($rootScope.currentUser){
-                delete $rootScope.currentUser;
-            }
             userService.logout()
                 .then(function (response) {
                     $location.url("/login");

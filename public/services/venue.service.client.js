@@ -33,8 +33,5 @@
             var url = "https://api.foursquare.com/v2/venues/search?ll="+lat+","+lng+"&categoryId="+categoryId+"&intent=checkin&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";;
             return $http.get(url);
         }
-
     }
-
-
 })();

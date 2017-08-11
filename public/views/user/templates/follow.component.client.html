@@ -1,9 +1,9 @@
 
 <h2>Following:</h2>
 
-<ul>
+<ul class="list-group">
     <li class="list-group-item" ng-repeat="user in model.following">
         <a href="#!/user/{{user._id}}">{{user.username}}</a>
-        <a ng-click="model.unfollowUser(user._id)">Unfollow</a>
+        <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
     </li>
 </ul>

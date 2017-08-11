@@ -11,11 +11,27 @@
 
         model.searchVenueByName = searchVenueByName;
         model.searchVenueByLocation = searchVenueByLocation;
+        model.toggleSearch = toggleSearch;
+
+        var toggle = "name";
 
         function init() {
+            model.toggle = toggle;
         }
 
         init();
+
+        function toggleSearch() {
+            if(toggle == "name"){
+                toggle = "location";
+                model.toggle = toggle;
+            } else {
+                toggle = "name";
+                model.toggle = toggle;
+            }
+
+
+        }
 
         function searchVenueByName(location, name) {
             venueService.searchVenueByName(location, name)
@@ -24,13 +40,11 @@
                 })
         }
 
-        function searchVenueByLocation() {
+        function searchVenueByLocation(category) {
             navigator.geolocation.getCurrentPosition(function (position) {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;
-                var categoryId = "4bf58dd8d48988d17f941735";
-                console.log(lat, lng);
-                venueService.searchVenueByLocation(lat, lng, categoryId)
+                venueService.searchVenueByLocation(lat, lng, category)
                     .then(function (response) {
                         model.resultByLocation = response.data;
                     });
