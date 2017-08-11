@@ -40,7 +40,7 @@ a:hover{
 }
 
 .hv-header{
-    background: url("../../vendor/img/header.jpg") no-repeat center center fixed;
+    background: url("../vendor/img/header.jpg") no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -55,10 +55,6 @@ a:hover{
 }
 input{
     margin-bottom: 5px;
-}
-
-body{
-    padding-top: 60px;
 }
 
 .hv-widget{
@@ -102,6 +98,7 @@ body{
     position: absolute;
     right: 0px;
     top: 60px;
+    background: red;
 }
 
 .hv-avatar-container{
