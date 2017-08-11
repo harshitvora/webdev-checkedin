@@ -21,6 +21,10 @@
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model"})
+            .when("/user/:uid/edit", {
+                templateUrl: "views/user/templates/profile-edit.view.client.html",
+                controller: "profileEditController",
+                controllerAs: "model"})
             .when("/poc", {
                 templateUrl: "views/poc/search.view.client.html",
                 controller: "searchController",

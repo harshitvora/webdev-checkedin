@@ -4,6 +4,8 @@
 
 var app = require("../../express");
 var userModel = require("../model/user/user.model.server");
+var multer = require('multer'); // npm install multer --save
+var upload = multer({ dest: __dirname+'/../../public/uploads' });
 
 // http handlers:
 app.get("/api/users", getAllUsers);
@@ -12,6 +14,7 @@ app.get("/api/user", findUserByCredentials);
 app.post("/api/user", createUser);
 app.delete("/api/user/:userId", deleteUser);
 app.put("/api/user/:userId", updateUser);
+app.post ("/api/upload", upload.single('myFile'), uploadImage);
 
 function getAllUsers(req, res) {
     userModel.getAllUsers()
@@ -84,4 +87,32 @@ function deleteUser(req, res) {
         }, function (err) {
             res.sendStatus(404).send(err);
         })
+}
+
+function uploadImage(req, res) {
+
+    var myFile        = req.file;
+    var userId = req.body.userId;
+
+    var originalname  = myFile.originalname; // file name on user's computer
+    var filename      = myFile.filename;     // new file name in upload folder
+    var path          = myFile.path;         // full path of uploaded file
+    var destination   = myFile.destination;  // folder where file is saved to
+    var size          = myFile.size;
+    var mimetype      = myFile.mimetype;
+
+    var user = null;
+    userModel.findUserById(userId)
+        .then(function (response) {
+            user = response;
+            user.pictureUrl = '/uploads/'+filename;
+            userModel.updateUser(userId, user)
+                .then(function (widget) {
+                    console.log(widget);
+                });
+        });
+
+    var callbackUrl = "/#!/user/"+userId+"/edit";
+
+    res.redirect(callbackUrl);
 }
