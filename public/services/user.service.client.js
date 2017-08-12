@@ -40,6 +40,7 @@
             var url = "/api/login";
             return $http.post(url, {username: username, password: password})
                 .then(function (response) {
+                    console.log(response.data);
                     return response.data;
                 });
         }

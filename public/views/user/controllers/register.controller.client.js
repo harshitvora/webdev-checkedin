@@ -34,9 +34,9 @@
                 })
                 .then(function (response) {
                     newUser = response;
-                    login(newUser);
-                    // $rootScope.currentUser = newUser;
-                    // $location.url("/user/"+newUser._id);
+                    if(newUser){
+                        login(newUser);
+                    }
                     return;
                 });
         }
