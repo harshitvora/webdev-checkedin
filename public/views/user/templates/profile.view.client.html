@@ -34,23 +34,41 @@
 <!--</div>-->
 <div class="container-fluid">
     <div class="row">
-        <div id="hide" class="col-md-4 col-xs-12">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
             <h1>Profile</h1>
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
-            <img src="{{model.user.pictureUrl}}">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-md-2 col-md-offset-4">
+            <img class="img-responsive" src="{{model.user.pictureUrl}}">
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
             <div ng-switch="model.followed">
                 <a ng-switch-when="false" role="button" ng-click="model.followUser()"
                    class="btn btn-primary btn-block">Follow User</a>
                 <a ng-switch-when="true" role="button" ng-click="model.unfollowUser()"
                    class="btn btn-danger btn-block">Unfollow User</a>
-                </div>
             </div>
+            <h1>Posts / activity:</h1>
+            <ul class="list-group">
+                <!--<li class="list-group-item" ng-repeat="user in model.following">-->
+                    <!--<a href="#!/user/{{user._id}}">{{user.username}}</a>-->
+                    <!--<a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>-->
+                <!--</li>-->
+                <li class="list-group-item">
+                    User does not have any posts :(
+                </li>
+            </ul>
         </div>
-        <div id="show" class="col-md-8 col-xs-12">
+        <!--<div id="show" class="col-md-8 col-xs-12">-->
 
-            Posts / activity
-            <!--<div ng-include="'views/user/templates/follow.component.client.html'"></div>-->
-        </div>
+            <!--Posts / activity-->
+            <!--&lt;!&ndash;<div ng-include="'viewsfollow.view.client.htmlnent.client.html'"></div>&ndash;&gt;-->
+        <!--</div>-->
     </div>
 </div>

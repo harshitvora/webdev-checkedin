@@ -28,6 +28,9 @@
                         currentUser = null;
                     } else {
                         currentUser = user;
+                        if(currentUser._id == userId){
+                            $location.url("/user");
+                        }
                         if(currentUser.following.includes(userId)){
                             model.followed = true;
                         }

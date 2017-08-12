@@ -7,7 +7,7 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($routeParams, venueService) {
+    function detailController($routeParams, venueService, userService) {
         var model = this;
 
         //Event handles:
@@ -20,18 +20,18 @@
 
         function init() {
 
-            model.followed = false;
-            userService.loggedin()
-                .then(function (user) {
-                    if(user == 0){
-                        currentUser = null;
-                    } else {
-                        currentUser = user;
-                        if(currentUser.following.includes(userId)){
-                            model.followed = true;
-                        }
-                    }
-                });
+            // model.followed = false;
+            // userService.loggedin()
+            //     .then(function (user) {
+            //         if(user == 0){
+            //             currentUser = null;
+            //         } else {
+            //             currentUser = user;
+            //             if(currentUser.following.includes(userId)){
+            //                 model.followed = true;
+            //             }
+            //         }
+            //     });
 
             venueService.searchVenueById(vid)
                 .then(function (response) {

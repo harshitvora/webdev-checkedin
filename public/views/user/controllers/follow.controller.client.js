@@ -1,13 +1,14 @@
 (function () {
     angular
         .module("CheckedIn")
-        .controller("userController", userController);
+        .controller("followController", followController);
 
-    function userController($routeParams, userService, $location, $rootScope, user) {
+    function followController($routeParams, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
         model.logout = logout;
+        model.unfollowUser = unfollowUser;
 
         var userId = user._id;
 
@@ -29,6 +30,15 @@
                 .then(function (response) {
                     $location.url("/login");
                 });
+        }
+
+        function unfollowUser(followId) {
+            userService.unfollowUser(userId, followId)
+                .then(function (response) {
+                    console.log(response);
+                    $location.url("/user/");
+                });
+
         }
     }
 })();

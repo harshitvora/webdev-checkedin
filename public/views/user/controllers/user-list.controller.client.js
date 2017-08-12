@@ -1,9 +1,9 @@
 (function () {
     angular
         .module("CheckedIn")
-        .controller("userController", userController);
+        .controller("userListController", userListController);
 
-    function userController($routeParams, userService, $location, $rootScope, user) {
+    function userListController($routeParams, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -12,15 +12,11 @@
         var userId = user._id;
 
         function init() {
-            userService.findUserByUserId(userId)
+            userService.getAllUsers()
                 .then(function (response) {
-                    model.user = response;
+                    model.users = response;
                 });
-            $rootScope.title = "Your profile";
-            userService.findFollowingForUser(userId)
-                .then(function (response) {
-                    model.following = response;
-                });
+            $rootScope.title = "Search users";
         }
         init();
 

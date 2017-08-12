@@ -16,9 +16,17 @@
             "unfollowUser": unfollowUser,
             "login": login,
             "loggedin": loggedin,
-            "logout": logout
+            "logout": logout,
+            "getAllUsers": getAllUsers
         };
         return api;
+
+        function getAllUsers() {
+            return $http.get("/api/users")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
 
         function findUserByCredentials(username, password) {
             var url = "/api/user?username="+username+"&password="+password;

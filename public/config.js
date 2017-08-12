@@ -31,6 +31,20 @@
                 resolve:{
                     user: loggedin
                 }})
+            .when("/user/following", {
+                templateUrl: "views/user/templates/follow.view.client.html",
+                controller: "followController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
+            .when("/user/search", {
+                templateUrl: "views/user/templates/user-list.view.client.html",
+                controller: "userListController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
             .when("/user/:uid", {
                 templateUrl: "views/user/templates/profile.view.client.html",
                 controller: "profileController",

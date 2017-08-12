@@ -20,18 +20,6 @@
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-<!--<div class="navbar navbar-default navbar-fixed-top hv-navbar-blue">-->
-    <!--<div class="container-fluid">-->
-        <!--<p class="navbar-text pull-left">-->
-            <!--<a href="#"><span class="glyphicon glyphicon-chevron-left pull-left hv-icon-white"></span></a>-->
-        <!--</p>-->
-        <!--<div class="navbar-brand hv-text-white">Profile</div>-->
-        <!--<p class="navbar-text pull-right">-->
-            <!--<a role="button" ng-click="model.updateUser(model.user)"><span class="glyphicon glyphicon-ok pull-right hv-icon-white"></span></a>-->
-        <!--</p>-->
-    <!--</div>-->
-<!--</div>-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-md-offset-4">
@@ -46,15 +34,25 @@
             <br>
         </div>
     </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <a href="#!/user/edit"
-               class="btn btn-primary btn-block">Edit Profile</a>
-            <a href="#!/user/following"
-               class="btn btn-default btn-block">Following {{model.following.length}}</a>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
+            <h2>Following:</h2>
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in model.following">
+                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                    <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
+                </li>
+                <li class="list-group-item" ng-show="!model.following.length">
+                    You do not follow any user :(
+                </li>
+            </ul>
+            <a href="#!/user/search"
+               class="btn btn-success btn-block">Find users</a>
         </div>
-        <!--<div id="show" class="col-md-8 col-xs-12"  style="background: red">-->
-            <!--<div ng-include="'views/user/templafollow.view.client.htmlhtml'"></div>-->
-        <!--</div>-->
     </div>
 </div>
+
+
+
+
