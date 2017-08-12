@@ -60,7 +60,7 @@
                 templateUrl: "views/home/search.view.client.html",
                 controller: "searchController",
                 controllerAs: "model"})
-            .when("/search/venue/:vid", {
+            .when("/venue/:vid", {
                 templateUrl: "views/home/detail.view.client.html",
                 controller: "detailController",
                 controllerAs: "model"})

@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("bookmarkController", bookmarkController);
 
-    function bookmarkController($routeParams, userService, $location, $rootScope, user) {
+    function bookmarkController($routeParams, venueService, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -21,6 +21,11 @@
             userService.findFollowingForUser(userId)
                 .then(function (response) {
                     model.following = response;
+                });
+
+            venueService.findVenuesForUser(userId)
+                .then(function (response) {
+                    model.bookmark = response;
                 });
         }
         init();

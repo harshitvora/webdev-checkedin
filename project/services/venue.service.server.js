@@ -8,6 +8,7 @@
 
 var app = require("../../express");
 var venueModel = require("../model/venue/venue.model.server");
+var userModel = require("../model/user/user.model.server");
 
 // http handlers:
 app.get("/api/venues", getAllVenues);
@@ -48,9 +49,9 @@ function findVenueById(req, res) {
 }
 
 function findVenuesForUser(req, res) {
-    venueModel.findVenuesForUser(req.params.venueId)
-        .then(function (venue) {
-            res.json(venue.following);
+    userModel.findUserById(req.params.userId)
+        .then(function (user) {
+            res.json(user.bookmarks);
         }, function (err) {
             res.sendStatus(404).send(err);
         });

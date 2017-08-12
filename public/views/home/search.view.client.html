@@ -30,7 +30,7 @@
                 <div ng-show="model.resultByName"><h1>Results:</h1>
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="val in model.resultByName.response.venues">
-                            <a href="#!/search/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
+                            <a href="#!/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
                         </li>
                     </ul></div>
 
@@ -58,7 +58,7 @@
                 <div ng-show="model.resultByLocation"><h1>Results:</h1>
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="val in model.resultByLocation.response.venues">
-                            <a href="#!/search/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
+                            <a href="#!/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
                         </li>
                     </ul></div>
             </div>

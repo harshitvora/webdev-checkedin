@@ -47,9 +47,9 @@
             <h2>Bookmarks:</h2>
 
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="user in model.bookmark">
-                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
-                    <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
+                <li class="list-group-item" ng-repeat="bookmark in model.bookmark">
+                    <a href="#!/venue/{{bookmark}}">Bookmark</a>
+                    <a ng-click="model.unbookmarkVenue(bookmark._id)" class="pull-right">Unbookmark</a>
                 </li>
                 <li class="list-group-item" ng-show="!model.bookmark.length">
                     You have not have any venue bookmarked :(
