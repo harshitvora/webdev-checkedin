@@ -38,6 +38,13 @@
                 resolve:{
                     user: loggedin
                 }})
+            .when("/user/bookmarks", {
+                templateUrl: "views/user/templates/bookmark.view.client.html",
+                controller: "bookmarkController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
             .when("/user/search", {
                 templateUrl: "views/user/templates/user-list.view.client.html",
                 controller: "userListController",

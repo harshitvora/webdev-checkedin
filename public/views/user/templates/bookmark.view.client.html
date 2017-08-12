@@ -14,25 +14,13 @@
             <ul class="nav navbar-nav">
                 <li><a href="#!/">Home</a></li>
                 <li><a href="#about">About</a></li>
-                <li class="active"><a href="#!/user">Profile</a></li>
+                <li class="active"><a href="#">Profile</a></li>
                 <li><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
-
-<!--<div class="navbar navbar-default navbar-fixed-top hv-navbar-blue">-->
-    <!--<div class="container-fluid">-->
-        <!--<p class="navbar-text pull-left">-->
-            <!--<a href="#"><span class="glyphicon glyphicon-chevron-left pull-left hv-icon-white"></span></a>-->
-        <!--</p>-->
-        <!--<div class="navbar-brand hv-text-white">Profile</div>-->
-        <!--<p class="navbar-text pull-right">-->
-            <!--<a role="button" ng-click="model.updateUser(model.user)"><span class="glyphicon glyphicon-ok pull-right hv-icon-white"></span></a>-->
-        <!--</p>-->
-    <!--</div>-->
-<!--</div>-->
-<div class="container-fluid">
+<div class="container-fluid hv-padding">
     <div class="row">
         <div class="col-xs-12 col-md-4 col-md-offset-4">
             <h1>Profile</h1>
@@ -46,17 +34,33 @@
             <br>
         </div>
     </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <a href="#!/user/edit"
-               class="btn btn-primary btn-block">Edit Profile</a>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
             <a href="#!/user/following"
                class="btn btn-default btn-block">Following {{model.following.length}}</a>
-                    <a href="#!/user/bookmarks"
-                       class="btn btn-default btn-block">Bookmarks {{model.bookmark.length}}</a>
+            <a href="#!/user/bookmarks"
+               class="btn btn-default btn-block">Bookmarks {{model.bookmark.length}}</a>
         </div>
-        <!--<div id="show" class="col-md-8 col-xs-12"  style="background: red">-->
-            <!--<div ng-include="'views/user/templafollow.view.client.htmlhtml'"></div>-->
-        <!--</div>-->
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-md-4 col-md-offset-4">
+            <h2>Bookmarks:</h2>
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in model.bookmark">
+                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                    <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
+                </li>
+                <li class="list-group-item" ng-show="!model.bookmark.length">
+                    You have not have any venue bookmarked :(
+                </li>
+            </ul>
+            <a href="#!/search"
+               class="btn btn-success btn-block">Find venues</a>
+        </div>
     </div>
 </div>
+
+
+
+
