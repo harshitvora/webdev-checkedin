@@ -10,6 +10,7 @@
         model.logout = logout;
 
         var userId = user._id;
+        var venueId = $routeParams['vid'];
 
         function init() {
             userService.findUserByUserId(userId)

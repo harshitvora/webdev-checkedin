@@ -26,12 +26,12 @@
 <h1>Venue name:</h1>
     {{model.venue.name}}
 
-    <!--<div ng-switch="model.saved">-->
-        <!--<a ng-switch-when="false" role="button" ng-click="model.saveVenue()"-->
-           <!--class="btn btn-primary btn-block">Bookmark</a>-->
-        <!--<a ng-switch-when="true" role="button" ng-click="model.unsaveVenue()"-->
-           <!--class="btn btn-danger btn-block">Remove bookmark</a>-->
-    <!--</div>-->
+    <div ng-switch="model.bookmarked">
+        <a ng-switch-when="false" role="button" ng-click="model.bookmarkVenue()"
+           class="btn btn-primary btn-block">Bookmark</a>
+        <a ng-switch-when="true" role="button" ng-click="model.unbookmarkVenue()"
+           class="btn btn-danger btn-block">Remove bookmark</a>
+    </div>
 
     <h2>Location:</h2>
     {{model.venue.location.formattedAddress}}

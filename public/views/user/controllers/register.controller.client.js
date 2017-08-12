@@ -34,10 +34,26 @@
                 })
                 .then(function (response) {
                     newUser = response;
-                    $rootScope.currentUser = newUser;
-                    $location.url("/user/"+newUser._id);
+                    login(newUser);
+                    // $rootScope.currentUser = newUser;
+                    // $location.url("/user/"+newUser._id);
                     return;
                 });
+        }
+
+        function login(user) {
+            userService.login(user.username, user.password)
+                .then(function (response) {
+                    var _user = response;
+                    if(!_user){
+                        model.errorMessage = "Wrong username or password!";
+                    }
+                    else {
+                        $rootScope.currentUser = _user;
+                        $location.url("user/");
+                    }
+                });
+
         }
     }
 })();

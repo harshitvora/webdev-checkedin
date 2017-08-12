@@ -1584,7 +1584,7 @@ function toKeyValue(obj) {
 
 
 /**
- * We need our custom method because encodeURIComponent is too aggressive and doesn't follow
+ * We need our custom method because encodeURIComponent is too aggressive and doesn't venue
  * http://www.ietf.org/rfc/rfc3986.txt with regards to the character set (pchar) allowed in path
  * segments:
  *    segment       = *pchar
@@ -16394,7 +16394,7 @@ function $ParseProvider() {
   * Allows defining the set of characters that are allowed in Angular expressions. The function
   * `identifierStart` will get called to know if a given character is a valid character to be the
   * first character for an identifier. The function `identifierContinue` will get called to know if
-  * a given character is a valid character to be a follow-up identifier character. The functions
+  * a given character is a valid character to be a venue-up identifier character. The functions
   * `identifierStart` and `identifierContinue` will receive as arguments the single character to be
   * identifier and the character code point. These arguments will be `string` and `numeric`. Keep in
   * mind that the `string` parameter can be two characters long depending on the character
@@ -18905,7 +18905,7 @@ var SCE_CONTEXTS = {
   JS: 'js'
 };
 
-// Helper functions follow.
+// Helper functions venue.
 
 var UNDERSCORE_LOWERCASE_REGEXP = /_([a-z])/g;
 
@@ -20620,7 +20620,7 @@ function $$CookieReader($document) {
           name = safeDecodeURIComponent(cookie.substring(0, index));
           // the first value that is seen for a cookie is the most
           // specific one.  values for the same cookie name that
-          // follow are for less specific paths.
+          // venue are for less specific paths.
           if (isUndefined(lastCookies[name])) {
             lastCookies[name] = safeDecodeURIComponent(cookie.substring(index + 1));
           }

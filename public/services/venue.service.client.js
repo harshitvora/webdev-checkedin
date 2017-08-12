@@ -9,6 +9,16 @@
         this.searchVenueById = searchVenueById;
         this.searchVenueByLocation = searchVenueByLocation;
 
+        this.getAllVenues = getAllVenues;
+        this.findVenueByVenueId = findVenueByVenueId;
+        this.createVenue = createVenue;
+        this.updateVenue = updateVenue;
+        this.deleteVenue = deleteVenue;
+        this.bookmarkVenue = bookmarkVenue;
+        this.unbookmarkVenue = unbookmarkVenue;
+        this.findVenuesForUser = findVenuesForUser;
+
+
         CLIENT_ID = "O0RQ5MCQRO0CXOWBQSSE5JXLLCO1M0L51NOEJH23YTNNX05B";
 
         CLIENT_SECRET = "3UGFREITEOYUFAT0I2FK0YDL2SHDPS0IQEDMAN1F2FOGSD3I";
@@ -33,5 +43,67 @@
             var url = "https://api.foursquare.com/v2/venues/search?ll="+lat+","+lng+"&categoryId="+categoryId+"&intent=checkin&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";;
             return $http.get(url);
         }
+
+
+        function getAllVenues() {
+            return $http.get("/api/venues")
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findVenueByVenueId(venueId) {
+            return $http.get("/api/venue/"+venueId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function createVenue(venue) {
+            var url = "/api/venue";
+            return $http.post(url,venue)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function updateVenue(venueId, venue) {
+            var url = "/api/venue/"+venueId;
+            return $http.put(url, venue)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function deleteVenue(venueId) {
+            return $http.delete("/api/venue/"+venueId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
+        function findVenuesForUser(userId) {
+            return $http.get("/api/user/"+userId+"/bookmark")
+                .then(function (response) {
+                    return response.data;
+                });
+
+        }
+
+        function bookmarkVenue(userId, venueId) {
+            return $http.post("/api/user/"+userId+"/bookmark/"+venueId)
+                .then(function (response) {
+                    console.log(response.data);
+                    return response.data;
+                });
+        }
+
+        function unbookmarkVenue(userId, venueId) {
+            return $http.delete("/api/user/"+userId+"/bookmark/"+venueId)
+                .then(function (response) {
+                    return response.data;
+                });
+        }
+
     }
 })();

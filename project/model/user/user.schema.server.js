@@ -13,7 +13,7 @@ var userSchema = mongoose.Schema({
     phone: String,
     pictureUrl: String,
     following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
-    // followers: [{type: mongoose.Schema.Types.ObjectId, ref:'FollowModel'}],
+    bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 
