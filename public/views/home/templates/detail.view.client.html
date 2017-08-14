@@ -40,5 +40,17 @@
     <h2>Rating:</h2>
     {{model.venue.rating}}
     <!--<h1>{{model.venue}}</h1>-->
+
+            <h2>Reviews:</h2>
+
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="review in model.reviews">
+                    <a href="#!/user/{{review._user._id}}">{{review._user.username}}:</a>
+                    {{review.text}}
+                </li>
+                <li class="list-group-item" ng-show="!model.reviews.length">
+                    There are no reviews for this venue, be the first one to leave a review!
+                </li>
+            </ul>
 </div>
 </div>

@@ -15,7 +15,7 @@
         var toggle = "name";
         function init() {
 
-            model.toggle = toggle;
+            $rootScope.toggle = toggle;
 
             userService.loggedin()
                 .then(function (user) {
@@ -40,26 +40,27 @@
         function toggleSearch() {
             if(toggle == "name"){
                 toggle = "location";
-                model.toggle = toggle;
+                $rootScope.toggle = toggle;
             } else {
                 toggle = "name";
-                model.toggle = toggle;
+                $rootScope.toggle = toggle;
             }
 
 
         }
 
         function searchVenueByName(location, name) {
+            $rootScope.location = location;
+            $rootScope.name = name;
             venueService.searchVenueByName(location, name)
                 .then(function (response) {
-                    $rootScope.location = location;
-                    $rootScope.name = name;
                     $rootScope.result = response;
                     $location.url("/search");
                 })
         }
 
         function searchVenueByLocation(category) {
+            $rootScope.category = category;
             navigator.geolocation.getCurrentPosition(function (position) {
                 var lat = position.coords.latitude;
                 var lng = position.coords.longitude;

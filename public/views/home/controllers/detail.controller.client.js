@@ -7,7 +7,7 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($routeParams, venueService, userService) {
+    function detailController($routeParams, venueService, userService, reviewService) {
         var model = this;
 
         //Event handles:
@@ -49,6 +49,11 @@
                     model.venue = venue;
                     console.log(venue);
                 }
+            });
+
+            reviewService.findReviewsForVenue(vid).then(function (response) {
+                console.log(response);
+                model.reviews = response;
             });
 
 
