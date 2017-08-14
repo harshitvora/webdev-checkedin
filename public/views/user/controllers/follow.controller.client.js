@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("followController", followController);
 
-    function followController($routeParams, userService, $location, $rootScope, user) {
+    function followController($routeParams, venueService, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -22,6 +22,11 @@
                 .then(function (response) {
                     model.following = response;
                 });
+
+            venueService.findVenuesForUser(userId)
+                .then(function (response) {
+                    model.bookmark = response;
+                });
         }
         init();
 
@@ -35,8 +40,7 @@
         function unfollowUser(followId) {
             userService.unfollowUser(userId, followId)
                 .then(function (response) {
-                    console.log(response);
-                    $location.url("/user/");
+                    $location.url("/user/following");
                 });
 
         }

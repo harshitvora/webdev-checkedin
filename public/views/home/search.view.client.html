@@ -19,51 +19,14 @@
     </div>
 </nav>
 <div class="container-fluid">
-    <div ng-switch="model.toggle">
-        <div class="row" ng-switch-when="name">
             <div class="col-xs-12 col-md-6 col-md-offset-3">
-                <h2>Search venue by name</h2>
-                <input type="text" placeholder="What are you looking for?" ng-model="name" class="form-control">
-                <input type="text" placeholder="Where are you looking?" ng-model="location" class="form-control">
-                <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByName(location, name)">Search</a>
-                or search by your current location <a ng-click="model.toggleSearch()">Toggle</a>
-                <div ng-show="model.resultByName"><h1>Results:</h1>
+
+                <div ng-show="result"><h1>Results:</h1>
                     <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="val in model.resultByName.response.venues">
+                        <li class="list-group-item" ng-repeat="val in result.response.venues">
                             <a href="#!/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
                         </li>
                     </ul></div>
 
             </div>
         </div>
-        <div class="row" ng-switch-when="location">
-            <div class="col-xs-12">
-                <h2>Search venues by your location</h2>
-                Category:
-                <div class="radio">
-                    <label><input type="radio" ng-model="category" value="4d4b7105d754a06374d81259" name="category">Food</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="category" value="4d4b7105d754a06376d81259" name="category">NightLife</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="category" value="4d4b7104d754a06370d81259" name="category">Fun</label>
-                </div>
-                <div class="radio">
-                    <label><input type="radio" ng-model="category" value="4d4b7105d754a06378d81259" name="category">Shop & service</label>
-                </div>
-
-                <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByLocation(category)">Find places around me</a>
-                or search by name <a ng-click="model.toggleSearch()">Toggle</a>
-                <div ng-show="model.resultByLocation"><h1>Results:</h1>
-                    <ul class="list-group">
-                        <li class="list-group-item" ng-repeat="val in model.resultByLocation.response.venues">
-                            <a href="#!/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
-                        </li>
-                    </ul></div>
-            </div>
-
-    </div>
-
-</div>
-</div>

@@ -49,7 +49,7 @@ function findVenueById(req, res) {
 }
 
 function findVenuesForUser(req, res) {
-    userModel.findUserById(req.params.userId)
+    venueModel.findVenuesForUser(req.params.userId)
         .then(function (user) {
             res.json(user.bookmarks);
         }, function (err) {

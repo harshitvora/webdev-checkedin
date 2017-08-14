@@ -14,6 +14,7 @@ venueModel.updateVenue = updateVenue;
 venueModel.deleteVenue = deleteVenue;
 venueModel.bookmarkVenue = bookmarkVenue;
 venueModel.unbookmarkVenue = unbookmarkVenue;
+venueModel.findVenuesForUser = findVenuesForUser;
 module.exports = venueModel;
 
 var userModel = require("../user/user.model.server");
@@ -59,4 +60,10 @@ function unbookmarkVenue(userId, venueId) {
             user.bookmarks.splice(index, 1);
             return user.save();
         })
+}
+
+function findVenuesForUser(userId) {
+    return userModel.findById(userId)
+        .populate('bookmarks')
+        .exec();
 }

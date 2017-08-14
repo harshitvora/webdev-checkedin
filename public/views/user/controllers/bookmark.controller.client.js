@@ -8,9 +8,10 @@
 
         //Event handles:
         model.logout = logout;
+        model.unbookmarkVenue = unbookmarkVenue;
 
         var userId = user._id;
-        var venueId = $routeParams['vid'];
+        // var venueId = $routeParams['vid'];
 
         function init() {
             userService.findUserByUserId(userId)
@@ -37,13 +38,12 @@
                 });
         }
 
-        // function unfollowUser(followId) {
-        //     userService.unfollowUser(userId, followId)
-        //         .then(function (response) {
-        //             console.log(response);
-        //             $location.url("/user/");
-        //         });
-        //
-        // }
+        function unbookmarkVenue(venueId) {
+            venueService.unbookmarkVenue(userId, venueId)
+                .then(function (response) {
+                    $location.url("/user/bookmarks");
+                });
+
+        }
     }
 })();

@@ -31,17 +31,23 @@
 
         function searchVenueByName(location, name) {
             var url = "https://api.foursquare.com/v2/venues/search?near="+location+"&query="+name+"&intent=checkin&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";
-            return $http.get(url);
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
         }
 
         function searchVenueById(id) {
             var url = "https://api.foursquare.com/v2/venues/"+id+"?client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";
-            return $http.get(url);
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
         }
 
         function searchVenueByLocation(lat, lng, categoryId) {
             var url = "https://api.foursquare.com/v2/venues/search?ll="+lat+","+lng+"&categoryId="+categoryId+"&intent=checkin&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";;
-            return $http.get(url);
+            return $http.get(url).then(function (response) {
+                return response.data;
+            });
         }
 
 

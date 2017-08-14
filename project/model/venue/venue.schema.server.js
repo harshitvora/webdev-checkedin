@@ -4,6 +4,7 @@
 var mongoose = require('mongoose');
 
 var venueSchema = mongoose.Schema({
+    _id: String,
     name: String,
     location: String,
     hours: String,
@@ -14,6 +15,6 @@ var venueSchema = mongoose.Schema({
     // following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
     // bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],
     // dateCreated: {type: Date, default: Date.now}
-}, {collection: "venue"});
+}, {collection: "venue", _id: false});
 
 module.exports = venueSchema;

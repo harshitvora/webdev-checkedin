@@ -24,6 +24,7 @@
 
             venueService.findVenuesForUser(userId)
                 .then(function (response) {
+                    console.log(response);
                     model.bookmark = response;
                 });
         }

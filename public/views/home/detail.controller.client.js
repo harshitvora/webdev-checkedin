@@ -17,6 +17,7 @@
 
         var vid = $routeParams["vid"];
         var currentUser;
+        var venue;
 
         function init() {
 
@@ -33,10 +34,24 @@
                     }
                 });
 
-            venueService.searchVenueById(vid)
-                .then(function (response) {
-                    model.venue = response.data.response.venue;
-                });
+            venueService.findVenueByVenueId(vid).then(function (response) {
+                console.log(response);
+                if(!response){
+                    venueService.searchVenueById(vid)
+                        .then(function (response) {
+                            venue = response.response.venue;
+                            venue.location = venue.location.formattedAddress;
+                            model.venue = venue;
+                        });
+                }
+                else {
+                    venue = response;
+                    model.venue = venue;
+                    console.log(venue);
+                }
+            });
+
+
         }
 
         init();
@@ -52,6 +67,17 @@
             if(!currentUser){
                 alert("Login to perform this action!");
             } else {
+
+                venueService.findVenueByVenueId(vid).then(function (response) {
+                    if(!response){
+                        var newVenue = {_id: vid,
+                            name: venue.name,
+                            location: venue.location.formattedAddress,
+                        rating: venue.rating};
+                        venueService.createVenue(newVenue);
+                    }
+                });
+
                 venueService.bookmarkVenue(currentUser._id, vid)
                     .then(function (response) {
                         model.bookmarked = true;
