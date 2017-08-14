@@ -40,13 +40,28 @@
     <h2>Rating:</h2>
     {{model.venue.rating}}
     <!--<h1>{{model.venue}}</h1>-->
+        </div>
+    </div>
 
+            <div class="row">
+                <div class="col-xs-12 col-md-6 col-md-offset-3">
+                    <hr>
+                <label for="text">Write a review:</label>
+                <input type="text"
+                       name="text"
+                       id="text"
+                       ng-model="model.userReview.text"
+                       placeholder="Say something about this place!"
+                       class="form-control">
+            <a role="button" ng-click="model.createReview(model.userReview)"
+               class="btn btn-primary btn-block">Submit</a>
             <h2>Reviews:</h2>
-
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="review in model.reviews">
-                    <a href="#!/user/{{review._user._id}}">{{review._user.username}}:</a>
-                    {{review.text}}
+
+                    <a href="#!/user/{{review._user._id}}"><b>{{review._user.username}}:</b></a><br>
+                    {{review.text}}<br>
+                    <small>{{review.dateCreated | date}}</small>
                 </li>
                 <li class="list-group-item" ng-show="!model.reviews.length">
                     There are no reviews for this venue, be the first one to leave a review!

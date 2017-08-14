@@ -25,20 +25,8 @@ function findReviewById(id) {
         .exec();
 }
 
-reviewModel.find({_id: "59911e4e0b635c539dba5cce"}).then(function (response) {
-    console.log(response);
-});
-
-reviewModel.find({venue: "57585d08498e05c399ce0c3d"}).then(function (response) {
-    console.log(response);
-});
-
 function findReviewsForVenue(venueId) {
-    console.log(venueId);
-    reviewModel.find({_venue: venueId}).then(function (response) {
-        console.log(response);
-    });
-    return reviewModel.find({_venue: venueId});
+    return reviewModel.find({_venue: venueId}).populate('_user').exec();
 }
 
 function findReviewsForUser(userId) {

@@ -7,13 +7,14 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($routeParams, venueService, userService, reviewService) {
+    function detailController($rootScope, $routeParams, venueService, userService, reviewService, $location, $route) {
         var model = this;
 
         //Event handles:
         model.logout = logout;
         model.bookmarkVenue = bookmarkVenue;
         model.unbookmarkVenue = unbookmarkVenue;
+        model.createReview = createReview;
 
         var vid = $routeParams["vid"];
         var currentUser;
@@ -35,7 +36,6 @@
                 });
 
             venueService.findVenueByVenueId(vid).then(function (response) {
-                console.log(response);
                 if(!response){
                     venueService.searchVenueById(vid)
                         .then(function (response) {
@@ -47,12 +47,11 @@
                 else {
                     venue = response;
                     model.venue = venue;
-                    console.log(venue);
                 }
+                $rootScope.title = venue.name;
             });
 
             reviewService.findReviewsForVenue(vid).then(function (response) {
-                console.log(response);
                 model.reviews = response;
             });
 
@@ -96,6 +95,15 @@
                     model.bookmarked = false;
                 });
 
+        }
+
+        function createReview(review) {
+            review._user = currentUser._id;
+            review._venue = vid;
+            reviewService.createReview(review).then(function (response) {
+                console.log(response);
+                $route.reload();
+            });
         }
     }
 })();
