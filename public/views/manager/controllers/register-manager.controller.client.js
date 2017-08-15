@@ -13,6 +13,7 @@
         var vid = $routeParams["vid"];
         var venue;
         var username;
+        var venueExists = false;
 
         //Event handles:
         model.register = register;
@@ -25,13 +26,15 @@
                             venue = response.response.venue;
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
+                            $rootScope.title = venue.name;
                         });
                 }
                 else {
                     venue = response;
                     model.venue = venue;
+                    venueExists = true;
+                    $rootScope.title = venue.name;
                 }
-                $rootScope.title = venue.name;
             });
         }
         init();
@@ -42,7 +45,7 @@
                     _user = response;
                     if(!_user){
                         if(user.password === user.verifyPassword){
-                            var newUser = {username: user.username, password: user.password, role:  "MANAGER"};
+                            var newUser = {username: user.username, password: user.password, role:  "MANAGER", _venue: vid};
                             return userService.createUser(newUser);
                         }
                         else {
@@ -56,14 +59,28 @@
                 })
                 .then(function (response) {
                     var newUser = response;
-                    venue._manager = newUser._id;
-                    console.log(venue);
-                    venueService.updateVenue(vid, venue).then(function (response) {
-                        if(newUser){
-                            login(newUser);
-                        }
-                        return;
-                    });
+                    if(venueExists){
+                        venue._manager = newUser._id;
+                        venueService.updateVenue(vid, venue).then(function (response) {
+                            if(newUser){
+                                login(newUser);
+                            }
+                            return;
+                        });
+                    } else {
+                        var newVenue = {_id: vid,
+                            name: venue.name,
+                            location: venue.location.formattedAddress,
+                            rating: venue.rating,
+                            _manager: newUser._id};
+                        venueService.createVenue(newVenue).then(function (response) {
+                            if(newUser){
+                                login(newUser);
+                            }
+                            return;
+                        })
+                    }
+
                 });
         }
 

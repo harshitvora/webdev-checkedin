@@ -39,6 +39,7 @@
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
             <a href="#!/user/edit" class="btn-default btn">Edit Profile</a>
+            <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}/manage" class="btn-default btn">Go to Venue page</a>
         </div>
     </div>
     <div class="row">

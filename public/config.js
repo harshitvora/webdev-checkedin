@@ -65,8 +65,12 @@
                 controller: "detailController",
                 controllerAs: "model"})
             .when("/register/:vid", {
-                templateUrl: "views/user/templates/register-manager.view.client.html",
+                templateUrl: "views/manager/templates/register-manager.view.client.html",
                 controller: "registerManagerController",
+                controllerAs: "model"})
+            .when("/venue/:vid/manage", {
+                templateUrl: "views/manager/templates/detail-manager.view.client.html",
+                controller: "detailManagerController",
                 controllerAs: "model"})
     }
 

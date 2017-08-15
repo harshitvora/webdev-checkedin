@@ -21,27 +21,11 @@
         var vid = $routeParams["vid"];
         var currentUser;
         var venue;
+        var venueExists = false;
 
         function init() {
-
+            model.vid = vid;
             model.bookmarked = false;
-            userService.loggedin()
-                .then(function (user) {
-                    if(user == 0){
-                        currentUser = null;
-                    } else {
-                        model.loggedin = true;
-                        model.uid = user._id;
-                        currentUser = user;
-                        if(currentUser.bookmarks.includes(vid)){
-                            model.bookmarked = true;
-                        }
-                        reviewService.findReviewByCredentials(user._id ,vid).then(function (response) {
-                            console.log(response);
-                            model.userReview = response;
-                        });
-                    }
-                });
 
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
@@ -50,14 +34,40 @@
                             venue = response.response.venue;
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
+                            $rootScope.title = venue.name;
                         });
                 }
                 else {
                     venue = response;
                     model.venue = venue;
+                    venueExists = true;
+                    $rootScope.title = venue.name;
                 }
-                $rootScope.title = venue.name;
+
+                userService.loggedin()
+                    .then(function (user) {
+                        if(user == 0){
+                            currentUser = null;
+                        }
+                        else if (venue._manager == user._id){
+                            $location.url("venue/"+vid+"/manage");
+                        }
+                        else {
+                            model.loggedin = true;
+                            model.uid = user._id;
+                            currentUser = user;
+                            if(currentUser.bookmarks.includes(vid)){
+                                model.bookmarked = true;
+                            }
+                            reviewService.findReviewByCredentials(user._id ,vid).then(function (response) {
+                                console.log(response);
+                                model.userReview = response;
+                            });
+                        }
+                    });
+
             });
+
 
             reviewService.findReviewsForVenue(vid).then(function (response) {
                 model.reviews = response.reverse();
@@ -77,20 +87,20 @@
 
         function bookmarkVenue() {
 
-                venueService.findVenueByVenueId(vid).then(function (response) {
-                    if(!response){
-                        var newVenue = {_id: vid,
-                            name: venue.name,
-                            location: venue.location.formattedAddress,
+            venueService.findVenueByVenueId(vid).then(function (response) {
+                if(!response){
+                    var newVenue = {_id: vid,
+                        name: venue.name,
+                        location: venue.location.formattedAddress,
                         rating: venue.rating};
-                        venueService.createVenue(newVenue);
-                    }
-                });
+                    venueService.createVenue(newVenue);
+                }
+            });
 
-                venueService.bookmarkVenue(currentUser._id, vid)
-                    .then(function (response) {
-                        model.bookmarked = true;
-                    });
+            venueService.bookmarkVenue(currentUser._id, vid)
+                .then(function (response) {
+                    model.bookmarked = true;
+                });
 
         }
 
