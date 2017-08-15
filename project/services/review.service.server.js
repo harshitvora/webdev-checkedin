@@ -10,7 +10,8 @@ app.get("/api/review/:reviewId", findReviewById);
 app.get("/api/review/venue/:venueId", findReviewsForVenue);
 app.get("/api/review/user/:userId", findReviewsForUser);
 app.post("/api/review", createReview);
-app.put("/api/user/:reviewId", updateReview);
+app.get("/api/review", findReviwByCredentials);
+app.put("/api/review/:reviewId", updateReview);
 app.delete("/api/review/:reviewId", deleteReview);
 
 function createReview(req, res) {
@@ -21,6 +22,21 @@ function createReview(req, res) {
         }, function (err) {
             res.sendStatus(404).send(err);
         });
+}
+
+function findReviwByCredentials(req, res) {
+
+    var userId = req.query.userId;
+    var venueId = req.query.venueId;
+
+    if (userId && venueId) {
+        reviewModel.findReviewByCredentials(userId, venueId)
+            .then(function (review) {
+                res.json(review);
+            }, function (err) {
+                res.sendStatus(404).send(err);
+            });
+    }
 }
 
 function findReviewById(req, res) {

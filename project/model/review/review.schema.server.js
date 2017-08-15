@@ -5,6 +5,7 @@
 var mongoose = require('mongoose');
 
 var reviewSchema = mongoose.Schema({
+    title: String,
     text: String,
     _user: {type: mongoose.Schema.Types.ObjectId,  ref: 'UserModel'},
     _venue: {type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'},

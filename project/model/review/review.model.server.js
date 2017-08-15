@@ -13,6 +13,7 @@ reviewModel.updateReview = updateReview;
 reviewModel.deleteReview = deleteReview;
 reviewModel.findReviewsForVenue = findReviewsForVenue;
 reviewModel.findReviewsForUser = findReviewsForUser;
+reviewModel.findReviewByCredentials = findReviewByCredentials;
 module.exports = reviewModel;
 
 function createReview(review) {
@@ -43,4 +44,8 @@ function deleteReview(reviewId) {
         .then(function (review) {
             return reviewModel.remove({_id: reviewId});
         });
+}
+
+function findReviewByCredentials(userId, venueId) {
+    return reviewModel.findOne({_user: userId, _venue: venueId});
 }

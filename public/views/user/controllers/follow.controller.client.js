@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("followController", followController);
 
-    function followController($routeParams, venueService, userService, $location, $rootScope, user) {
+    function followController($route, $routeParams, venueService, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -40,7 +40,7 @@
         function unfollowUser(followId) {
             userService.unfollowUser(userId, followId)
                 .then(function (response) {
-                    $location.url("/user/following");
+                    $route.reload();
                 });
 
         }

@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("bookmarkController", bookmarkController);
 
-    function bookmarkController($routeParams, venueService, userService, $location, $rootScope, user) {
+    function bookmarkController($route, $routeParams, venueService, userService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -41,7 +41,7 @@
         function unbookmarkVenue(venueId) {
             venueService.unbookmarkVenue(userId, venueId)
                 .then(function (response) {
-                    $location.url("/user/bookmarks");
+                    $route.reload();
                 });
 
         }

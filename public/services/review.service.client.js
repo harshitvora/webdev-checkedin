@@ -15,6 +15,7 @@
         this.deleteReview = deleteReview;
         this.findReviewsForVenue = findReviewsForVenue;
         this.findReviewsForUser = findReviewsForUser;
+        this.findReviewByCredentials = findReviewByCredentials;
 
         function findReviewByReviewId(reviewId) {
             return $http.get("/api/review/"+reviewId)
@@ -62,6 +63,13 @@
 
         }
 
-
+        function findReviewByCredentials(userId, venueId) {
+            var url = "/api/review?userId="+userId+"&venueId="+venueId;
+            return $http.get(url)
+                .then(function (response) {
+                    console.log(response.data);
+                    return response.data;
+                });
+        }
     }
 })();

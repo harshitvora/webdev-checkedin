@@ -15,6 +15,8 @@
         model.bookmarkVenue = bookmarkVenue;
         model.unbookmarkVenue = unbookmarkVenue;
         model.createReview = createReview;
+        model.updateReview = updateReview;
+        model.deleteReview = deleteReview;
 
         var vid = $routeParams["vid"];
         var currentUser;
@@ -28,10 +30,16 @@
                     if(user == 0){
                         currentUser = null;
                     } else {
+                        model.loggedin = true;
+                        model.uid = user._id;
                         currentUser = user;
                         if(currentUser.bookmarks.includes(vid)){
                             model.bookmarked = true;
                         }
+                        reviewService.findReviewByCredentials(user._id ,vid).then(function (response) {
+                            console.log(response);
+                            model.userReview = response;
+                        });
                     }
                 });
 
@@ -52,7 +60,7 @@
             });
 
             reviewService.findReviewsForVenue(vid).then(function (response) {
-                model.reviews = response;
+                model.reviews = response.reverse();
             });
 
 
@@ -68,9 +76,6 @@
         }
 
         function bookmarkVenue() {
-            if(!currentUser){
-                alert("Login to perform this action!");
-            } else {
 
                 venueService.findVenueByVenueId(vid).then(function (response) {
                     if(!response){
@@ -86,7 +91,7 @@
                     .then(function (response) {
                         model.bookmarked = true;
                     });
-            }
+
         }
 
         function unbookmarkVenue() {
@@ -98,9 +103,33 @@
         }
 
         function createReview(review) {
+            venueService.findVenueByVenueId(vid).then(function (response) {
+                if(!response){
+                    var newVenue = {_id: vid,
+                        name: venue.name,
+                        location: venue.location.formattedAddress,
+                        rating: venue.rating};
+                    venueService.createVenue(newVenue);
+                }
+            });
+
             review._user = currentUser._id;
             review._venue = vid;
             reviewService.createReview(review).then(function (response) {
+                console.log(response);
+                $route.reload();
+            });
+        }
+
+        function updateReview(review) {
+            reviewService.updateReview(review._id, review).then(function (response) {
+                console.log(response);
+                $route.reload();
+            });
+        }
+
+        function deleteReview(id) {
+            reviewService.deleteReview(id).then(function (response) {
                 console.log(response);
                 $route.reload();
             });
