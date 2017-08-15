@@ -1,1 +1,76 @@
-Detail manager view
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CheckedIn</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#!/">Home</a></li>
+                <li class="active"><a href="#">Search</a></li>
+                <li><a href="#!/login">Login</a></li>
+                <li><a href="#!/user">Profile</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <h1>Venue name:</h1>
+            {{model.venue.name}}
+            <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}/manage" class="btn-default btn">Manage page</a>
+
+
+            <h2>Location:</h2>
+            {{model.venue.location}}
+            <h2>Timings:</h2>
+            {{model.venue.hours.status}}
+            <h2>Rating:</h2>
+            {{model.venue.rating}}
+            <!--<h1>{{model.venue}}</h1>-->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-md-6 col-md-offset-3">
+            <hr>
+                    <label for="review">Post Offer:</label>
+                    <input type="text"
+                           name="title"
+                           id="review"
+                           ng-model="model.venue.offerTitle"
+                           placeholder="Title"
+                           class="form-control">
+                    <input type="text"
+                           name="text"
+                           ng-model="model.venue.offerText"
+                           placeholder="Say something about this place!"
+                           class="form-control">
+                    <a role="button" ng-click="model.updateOffer(model.venue)"
+                       class="btn btn-primary btn-block">Update</a>
+                    <a role="button" ng-click="model.deleteOffer()"
+                       class="btn btn-danger btn-block">Delete</a>
+            <h2>Reviews:</h2>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="review in model.reviews">
+
+                    <b>{{review.title}}:</b><br>
+                    {{review.text}}<br>
+                    <small>By <a href="#!/user/{{review._user._id}}">{{review._user.username}}</a> on {{review.dateCreated | date}}</small>
+                </li>
+                <li class="list-group-item" ng-show="!model.reviews.length">
+                    There are no reviews for this venue, be the first one to leave a review!
+                </li>
+            </ul>
+            <div ng-show="!model.venue._manager"><small>Do you work at <b>{{model.venue.name}}</b>? Register <a href="#!/register/{{model.vid}}">here</a> as a manager to manage this page and post offers!</small></div>
+        </div>
+
+    </div>
+</div>

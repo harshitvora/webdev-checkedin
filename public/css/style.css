@@ -57,6 +57,20 @@ input{
     margin-bottom: 5px;
 }
 
+body{
+    padding-top: 75px;
+    padding-bottom: 15px;
+    background-color: #b2dbfb;
+}
+
+.hv-spacing{
+    height: 15px;
+}
+
+.hv-container-color{
+    background-color: white;
+}
+
 .hv-widget{
     position: relative;
 }

@@ -71,7 +71,10 @@
             .when("/venue/:vid/manage", {
                 templateUrl: "views/manager/templates/detail-manager.view.client.html",
                 controller: "detailManagerController",
-                controllerAs: "model"})
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
     }
 
     function loggedin(userService, $q, $location) {

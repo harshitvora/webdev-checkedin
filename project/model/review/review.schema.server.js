@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var reviewSchema = mongoose.Schema({
     title: String,
     text: String,
+    reply: String,
     _user: {type: mongoose.Schema.Types.ObjectId,  ref: 'UserModel'},
     _venue: {type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'},
     dateCreated: {type: Date, default: Date.now}

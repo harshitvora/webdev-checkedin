@@ -49,13 +49,11 @@
                         if(user == 0){
                             currentUser = null;
                         }
-                        else if (venue._manager == user._id){
-                            $location.url("venue/"+vid+"/manage");
-                        }
                         else {
                             model.loggedin = true;
                             model.uid = user._id;
                             currentUser = user;
+                            model.user = currentUser;
                             if(currentUser.bookmarks.includes(vid)){
                                 model.bookmarked = true;
                             }

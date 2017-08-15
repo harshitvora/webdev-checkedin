@@ -9,7 +9,9 @@ var venueSchema = mongoose.Schema({
     location: String,
     hours: String,
     rating: String,
-    _manager: {type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}
+    _manager: {type: mongoose.Schema.Types.ObjectId, ref:'UserModel'},
+    offerTitle : String,
+    offerText : String,
     // email: String,
     // phone: String,
     // pictureUrl: String,
