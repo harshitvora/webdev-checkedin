@@ -67,20 +67,23 @@
                 <li class="list-group-item" ng-repeat="n in model.notification">
                     <div ng-switch="n.type">
                         <div ng-switch-when="REVIEW">
-                            <a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>
+                            <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> left a review for <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>, check it out!<br>
+                            <small>{{n.dateCreated | date}}</small>
                         </div>
-                        <!--<div ng-switch-when="REVIEW">-->
-                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
-                        <!--</div>-->
-                        <!--<div ng-switch-when="REVIEW">-->
-                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
-                        <!--</div>-->
-                        <!--<div ng-switch-when="REVIEW">-->
-                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
-                        <!--</div>-->
+                        <div ng-switch-when="OFFER">
+                            <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a> just posted a new offer, don't miss it!<br>
+                            <small>{{n.dateCreated | date}}</small>
+                        </div>
+                        <div ng-switch-when="INVITE">
+                            <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> invited you:<br>
+                            {{n.text}}<br>
+                            <small>{{n.dateCreated | date}}</small>
+                        </div>
+                        <div ng-switch-when="CHECKIN">
+                            <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> just checked in at <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>!<br>
+                            <small>{{n.dateCreated | date}}</small>
+                        </div>
                     </div>
-
-                    <!--<a ng-click="" class="pull-right">Remove</a>-->
                 </li>
                 <li class="list-group-item" ng-show="!model.notification.length">
                     You do not have any notifications :(

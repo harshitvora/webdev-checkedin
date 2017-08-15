@@ -29,7 +29,7 @@
 
             notificationService.findNotificationsForFollower(userId).then(function (response) {
                 console.log(response);
-                model.notification = response;
+                model.notification = response.reverse();
             });
         }
         init();

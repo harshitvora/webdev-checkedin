@@ -64,6 +64,10 @@
                 templateUrl: "views/home/templates/detail.view.client.html",
                 controller: "detailController",
                 controllerAs: "model"})
+            .when("/register/:vid", {
+                templateUrl: "views/user/templates/register-manager.view.client.html",
+                controller: "registerManagerController",
+                controllerAs: "model"})
     }
 
     function loggedin(userService, $q, $location) {

@@ -8,7 +8,8 @@ var venueSchema = mongoose.Schema({
     name: String,
     location: String,
     hours: String,
-    rating: String
+    rating: String,
+    _manager: {type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}
     // email: String,
     // phone: String,
     // pictureUrl: String,

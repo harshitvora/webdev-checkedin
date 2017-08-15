@@ -14,6 +14,7 @@ var userSchema = mongoose.Schema({
     pictureUrl: String,
     following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
     bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],
+    role: {type:String, enum:['CUSTOMER', 'MANAGER', 'ADMIN']},
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 
