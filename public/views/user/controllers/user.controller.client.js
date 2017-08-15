@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("userController", userController);
 
-    function userController($routeParams, userService, venueService, $location, $rootScope, user) {
+    function userController($routeParams, userService, venueService, notificationService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
@@ -24,9 +24,13 @@
 
             venueService.findVenuesForUser(userId)
                 .then(function (response) {
-                    console.log(response);
                     model.bookmark = response;
                 });
+
+            notificationService.findNotificationsForFollower(userId).then(function (response) {
+                console.log(response);
+                model.notification = response;
+            });
         }
         init();
 

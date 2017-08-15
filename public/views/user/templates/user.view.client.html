@@ -65,10 +65,24 @@
 
             <ul class="list-group">
                 <li class="list-group-item" ng-repeat="n in model.notification">
-                    <a href="#!/user/">{{n.text}}</a>
-                    <a ng-click="" class="pull-right">Remove</a>
+                    <div ng-switch="n.type">
+                        <div ng-switch-when="REVIEW">
+                            <a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>
+                        </div>
+                        <!--<div ng-switch-when="REVIEW">-->
+                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
+                        <!--</div>-->
+                        <!--<div ng-switch-when="REVIEW">-->
+                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
+                        <!--</div>-->
+                        <!--<div ng-switch-when="REVIEW">-->
+                            <!--<a href="#!/user/{{n._user._id}}">{{n._user.username}}</a> left a review for <a href="#!/venue/{{n._venue._id}}">{{n._venue.name}}</a>-->
+                        <!--</div>-->
+                    </div>
+
+                    <!--<a ng-click="" class="pull-right">Remove</a>-->
                 </li>
-                <li class="list-group-item" ng-show="!model.notificaion.length">
+                <li class="list-group-item" ng-show="!model.notification.length">
                     You do not have any notifications :(
                 </li>
             </ul>

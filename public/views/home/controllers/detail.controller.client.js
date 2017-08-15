@@ -7,7 +7,7 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($rootScope, $routeParams, venueService, userService, reviewService, $location, $route) {
+    function detailController($rootScope, $routeParams, venueService, notificationService, userService, reviewService, $location, $route) {
         var model = this;
 
         //Event handles:
@@ -113,24 +113,25 @@
                 }
             });
 
+            notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
+
+            notificationService.createNotification(notification);
+
             review._user = currentUser._id;
             review._venue = vid;
             reviewService.createReview(review).then(function (response) {
-                console.log(response);
                 $route.reload();
             });
         }
 
         function updateReview(review) {
             reviewService.updateReview(review._id, review).then(function (response) {
-                console.log(response);
                 $route.reload();
             });
         }
 
         function deleteReview(id) {
             reviewService.deleteReview(id).then(function (response) {
-                console.log(response);
                 $route.reload();
             });
         }
