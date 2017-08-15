@@ -102,7 +102,13 @@
 
                     <b>{{review.title}}:</b><br>
                     {{review.text}}<br>
-                    <small>By <a href="#!/user/{{review._user._id}}">{{review._user.username}}</a> on {{review.dateCreated | date}}</small>
+                    <small>By <a href="#!/user/{{review._user._id}}">{{review._user.username}}</a> on {{review.dateCreated | date}}</small><br>
+
+                    <div ng-show="review.reply">
+                        {{model.venue.name}} says:<br>
+                        {{review.reply}}
+                    </div>
+
                 </li>
                 <li class="list-group-item" ng-show="!model.reviews.length">
                     There are no reviews for this venue, be the first one to leave a review!

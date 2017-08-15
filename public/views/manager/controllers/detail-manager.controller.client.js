@@ -14,18 +14,21 @@
         model.logout = logout;
         model.addReply = addReply;
         model.updateReply = updateReply;
+        model.deleteReply = deleteReply;
         model.updateOffer = updateOffer;
         model.deleteOffer = deleteOffer;
+        model.toggleReply = toggleReply;
 
         var vid = $routeParams["vid"];
         var currentUser;
         var venue;
         var venueExists = false;
+        var replyOn = false;
 
         function init() {
             model.vid = vid;
             model.bookmarked = false;
-
+            model.replyOn = replyOn;
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
                     venueService.searchVenueById(vid)
@@ -64,29 +67,33 @@
                 });
         }
 
-        function addReply(review) {
-            venueService.findVenueByVenueId(vid).then(function (response) {
-                if(!response){
-                    var newVenue = {_id: vid,
-                        name: venue.name,
-                        location: venue.location.formattedAddress,
-                        rating: venue.rating};
-                    venueService.createVenue(newVenue);
-                }
-            });
+        function toggleReply() {
+            if(replyOn){
+                replyOn = false;
+                model.replyOn = replyOn;
+            } else {
+                replyOn = true;
+                model.replyOn = replyOn;
+            }
 
-            notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
 
-            notificationService.createNotification(notification);
+        }
 
-            review._user = currentUser._id;
-            review._venue = vid;
-            reviewService.createReview(review).then(function (response) {
+        function addReply(review, reply) {
+            review.reply = reply;
+            reviewService.updateReview(review._id, review).then(function (response) {
                 $route.reload();
             });
         }
 
         function updateReply(review) {
+            reviewService.updateReview(review._id, review).then(function (response) {
+                $route.reload();
+            });
+        }
+
+        function deleteReply(review) {
+            review.reply = "";
             reviewService.updateReview(review._id, review).then(function (response) {
                 $route.reload();
             });
