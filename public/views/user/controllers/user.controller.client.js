@@ -3,15 +3,24 @@
         .module("CheckedIn")
         .controller("userController", userController);
 
-    function userController($routeParams, userService, venueService, notificationService, $location, $rootScope, user) {
+    function userController($routeParams, $route, userService, venueService, reviewService, notificationService, $location, $rootScope, user) {
         var model = this;
 
         //Event handles:
         model.logout = logout;
+        model.toNotification = toNotification;
+        model.toFollow = toFollow;
+        model.toBookmark = toBookmark;
+        model.toReview = toReview;
+        model.deleteReview = deleteReview;
+        model.unfollowUser = unfollowUser;
+        model.unbookmarkVenue = unbookmarkVenue;
 
         var userId = user._id;
-
         function init() {
+
+            model.currentTab = "NOTIFICATION";
+
             userService.findUserByUserId(userId)
                 .then(function (response) {
                     model.user = response;
@@ -27,6 +36,11 @@
                     model.bookmark = response;
                 });
 
+            reviewService.findReviewsForUser(userId)
+                .then(function (response) {
+                    model.review = response.reverse();
+                });
+
             notificationService.findNotificationsForFollower(userId).then(function (response) {
                 console.log(response);
                 model.notification = response.reverse();
@@ -39,6 +53,46 @@
                 .then(function (response) {
                     $location.url("/login");
                 });
+        }
+
+        function toNotification() {
+            model.currentTab = "NOTIFICATION";
+        }
+
+        function toFollow() {
+            model.currentTab = "FOLLOW";
+        }
+
+        function toBookmark() {
+            model.currentTab = "BOOKMARK";
+        }
+
+        function toReview() {
+            model.currentTab = "REVIEW";
+        }
+
+        function deleteReview(reviewId) {
+            reviewService.deleteReview(reviewId)
+                .then(function (response) {
+                    $route.reload();
+                });
+
+        }
+
+        function unfollowUser(followId) {
+            userService.unfollowUser(userId, followId)
+                .then(function (response) {
+                    $route.reload();
+                });
+
+        }
+
+        function unbookmarkVenue(venueId) {
+            venueService.unbookmarkVenue(userId, venueId)
+                .then(function (response) {
+                    $route.reload();
+                });
+
         }
     }
 })();

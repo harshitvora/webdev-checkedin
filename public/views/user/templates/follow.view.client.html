@@ -1,65 +1,28 @@
+<div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+        <ul class="nav nav-tabs">
+            <li><a ng-click="model.toNotification()">Notifications</a></li>
+            <li class="active"><a ng-click="model.toFollow()">Following ({{model.following.length}})</a></li>
+            <li><a ng-click="model.toBookmark()">Bookmarks ({{model.bookmark.length}})</a></li>
+            <li><a ng-click="model.toReview()">Reviews ({{model.review.length}})</a></li>
+        </ul>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-12 col-md-4 col-md-offset-4">
+        <h2>Following:</h2>
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#">CheckedIn</a>
-        </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li><a href="#!/">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li class="active"><a href="#">Profile</a></li>
-                <li><a ng-click="model.logout()">Logout</a></li>
-            </ul>
-        </div><!--/.nav-collapse -->
-    </div>
-</nav>
-<div class="container-fluid hv-padding">
-    <div class="row">
-        <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <h1>Profile</h1>
-            <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
-            @{{model.user.username}}
-            <a href="#!/user/edit" class="btn-default btn">Edit Profile</a>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-6 col-md-2 col-md-offset-4">
-            <img class="img-responsive" src="{{model.user.pictureUrl}}">
-            <br>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <ul class="nav nav-tabs">
-                <li><a href="#!/user/">Notifications</a></li>
-                <li class="active"><a href="#!/user/following">Following ({{model.following.length}})</a></li>
-                <li><a href="#!/user/bookmarks">Bookmarks ({{model.bookmark.length}})</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12 col-md-4 col-md-offset-4">
-            <h2>Following:</h2>
-
-            <ul class="list-group">
-                <li class="list-group-item" ng-repeat="user in model.following">
-                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
-                    <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
-                </li>
-                <li class="list-group-item" ng-show="!model.following.length">
-                    You do not follow any user :(
-                </li>
-            </ul>
-            <a href="#!/user/search"
-               class="btn btn-success btn-block">Find users</a>
-        </div>
+        <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in model.following">
+                <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                <a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>
+            </li>
+            <li class="list-group-item" ng-show="!model.following.length">
+                You do not follow any user :(
+            </li>
+        </ul>
+        <a href="#!/user/search"
+           class="btn btn-success btn-block">Find users</a>
     </div>
 </div>
 

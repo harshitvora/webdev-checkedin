@@ -10,11 +10,11 @@
                 controller: "homeController",
                 controllerAs: "model"})
             .when("/login", {
-                templateUrl: "views/user/templates/login.view.client.html",
+                templateUrl: "views/profile/templates/login.view.client.html",
                 controller: "loginController",
                 controllerAs: "model"})
             .when("/register", {
-                templateUrl: "views/user/templates/register.view.client.html",
+                templateUrl: "views/profile/templates/register.view.client.html",
                 controller: "registerController",
                 controllerAs: "model"})
             .when("/user", {
@@ -31,20 +31,6 @@
                 resolve:{
                     user: loggedin
                 }})
-            .when("/user/following", {
-                templateUrl: "views/user/templates/follow.view.client.html",
-                controller: "followController",
-                controllerAs: "model",
-                resolve:{
-                    user: loggedin
-                }})
-            .when("/user/bookmarks", {
-                templateUrl: "views/user/templates/bookmark.view.client.html",
-                controller: "bookmarkController",
-                controllerAs: "model",
-                resolve:{
-                    user: loggedin
-                }})
             .when("/user/search", {
                 templateUrl: "views/user/templates/user-list.view.client.html",
                 controller: "userListController",
@@ -53,7 +39,7 @@
                     user: loggedin
                 }})
             .when("/user/:uid", {
-                templateUrl: "views/user/templates/profile.view.client.html",
+                templateUrl: "views/profile/templates/profile.view.client.html",
                 controller: "profileController",
                 controllerAs: "model"})
             .when("/search", {

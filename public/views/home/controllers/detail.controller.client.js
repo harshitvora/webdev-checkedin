@@ -127,6 +127,7 @@
 
             review._user = currentUser._id;
             review._venue = vid;
+            review.venueName = venue.name;
             reviewService.createReview(review).then(function (response) {
                 $route.reload();
             });

@@ -58,7 +58,7 @@ function findReviewsForVenue(req, res) {
 }
 
 function findReviewsForUser(req, res) {
-    reviewModel.findReviewsForVenue(req.params.userId)
+    reviewModel.findReviewsForUser(req.params.userId)
         .then(function (reviews) {
             res.json(reviews);
         }, function (err) {

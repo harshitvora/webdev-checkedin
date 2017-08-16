@@ -10,6 +10,7 @@ var reviewSchema = mongoose.Schema({
     reply: String,
     _user: {type: mongoose.Schema.Types.ObjectId,  ref: 'UserModel'},
     _venue: {type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'},
+    venueName: String,
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "review"});
 
