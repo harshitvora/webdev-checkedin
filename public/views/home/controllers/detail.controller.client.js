@@ -23,7 +23,8 @@
         var currentUser;
         var venue;
         var venueExists = false;
-
+        var lat;
+        var lng;
         function init() {
             model.vid = vid;
             model.bookmarked = false;
@@ -34,6 +35,10 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
+                            console.log(venue.location);
+                            lat = venue.location.lat;
+                            lng = venue.location.lng;
+                            model.mapUrl = venueService.getMapImage(lat,lng);
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
                             $rootScope.title = venue.name;
@@ -42,9 +47,14 @@
                 else {
                     venue = response;
                     model.venue = venue;
+                    lat = venue.lat;
+                    lng = venue.lng;
+                    model.mapUrl = venueService.getMapImage(lat,lng);
                     venueExists = true;
                     $rootScope.title = venue.name;
                 }
+
+
 
                 userService.loggedin()
                     .then(function (user) {
@@ -60,7 +70,6 @@
                                 model.bookmarked = true;
                             }
                             reviewService.findReviewByCredentials(user._id ,vid).then(function (response) {
-                                console.log(response);
                                 model.userReview = response;
                             });
                         }
@@ -72,6 +81,7 @@
             reviewService.findReviewsForVenue(vid).then(function (response) {
                 model.reviews = response.reverse();
             });
+
 
 
         }
@@ -89,10 +99,14 @@
 
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
+                    console.log(venue.location);
                     var newVenue = {_id: vid,
                         name: venue.name,
                         location: venue.location.formattedAddress,
-                        rating: venue.rating};
+                        rating: venue.rating,
+                        lat: lat,
+                        lng: lng};
+                    console.log(newVenue);
                     venueService.createVenue(newVenue);
                 }
             });
@@ -118,7 +132,9 @@
                     var newVenue = {_id: vid,
                         name: venue.name,
                         location: venue.location.formattedAddress,
-                        rating: venue.rating};
+                        rating: venue.rating,
+                        lat: lat,
+                        lng: lng};
                     venueService.createVenue(newVenue);
                 }
             });

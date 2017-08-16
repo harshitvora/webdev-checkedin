@@ -8,6 +8,7 @@
         this.searchVenueByName = searchVenueByName;
         this.searchVenueById = searchVenueById;
         this.searchVenueByLocation = searchVenueByLocation;
+        this.getMapImage = getMapImage;
 
         this.getAllVenues = getAllVenues;
         this.findVenueByVenueId = findVenueByVenueId;
@@ -19,11 +20,11 @@
         this.findVenuesForUser = findVenuesForUser;
 
 
-        CLIENT_ID = "O0RQ5MCQRO0CXOWBQSSE5JXLLCO1M0L51NOEJH23YTNNX05B";
+        var CLIENT_ID = "O0RQ5MCQRO0CXOWBQSSE5JXLLCO1M0L51NOEJH23YTNNX05B";
 
-        CLIENT_SECRET = "3UGFREITEOYUFAT0I2FK0YDL2SHDPS0IQEDMAN1F2FOGSD3I";
+        var CLIENT_SECRET = "3UGFREITEOYUFAT0I2FK0YDL2SHDPS0IQEDMAN1F2FOGSD3I";
 
-        GEO_API_KEY = "AIzaSyDGaL7od2kZJ1Aq5eBFgM0pjNKx5WqOy6I";
+        var GEO_API_KEY = "AIzaSyCkNxcZ_khMSiPIJ48hmOWElZ0yRWPf_Uk";
 
         var GEO_URL = "https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY";
 
@@ -48,6 +49,11 @@
             return $http.get(url).then(function (response) {
                 return response.data;
             });
+        }
+
+        function getMapImage(lat, lng) {
+            var url = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lng+"&zoom=13&size=600x300&maptype=roadmap&markers=color:red|"+lat+","+lng+"&key="+GEO_API_KEY;
+            return url;
         }
 
 

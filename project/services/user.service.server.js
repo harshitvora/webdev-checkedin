@@ -18,8 +18,8 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 // };
 
 var googleConfig = {
-    clientID     : "239406439497-mkbhdpkq0fkmudsi5cvo0l97aofnenob.apps.googleusercontent.com",
-    clientSecret : "TK0ueRBOsNmMSrifA9Sgzel3",
+    clientID     : "640186434567-gu4iv8b7v4iaiinstn423ob50romv0vh.apps.googleusercontent.com",
+    clientSecret : "QPptLx_7NX8DbJDEtNnLTx4t",
     callbackURL  : "http://localhost:3000/auth/google/callback"
 };
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));

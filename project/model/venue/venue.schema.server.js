@@ -12,6 +12,8 @@ var venueSchema = mongoose.Schema({
     _manager: {type: mongoose.Schema.Types.ObjectId, ref:'UserModel'},
     offerTitle : String,
     offerText : String,
+    lat: String,
+    lng: String,
     // email: String,
     // phone: String,
     // pictureUrl: String,
