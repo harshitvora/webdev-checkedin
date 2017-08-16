@@ -54,16 +54,14 @@
                 <a ng-switch-when="true" role="button" ng-click="model.unfollowUser()"
                    class="btn btn-danger btn-block">Unfollow User</a>
             </div>
-            <h1>Posts / activity:</h1>
-            <ul class="list-group">
-                <!--<li class="list-group-item" ng-repeat="user in model.following">-->
-                    <!--<a href="#!/user/{{user._id}}">{{user.username}}</a>-->
-                    <!--<a ng-click="model.unfollowUser(user._id)" class="pull-right">Unfollow</a>-->
-                <!--</li>-->
-                <li class="list-group-item">
-                    User does not have any posts :(
-                </li>
-            </ul>
+            <div ng-switch="model.currentTab">
+                <div ng-switch-when="FOLLOW">
+                    <ng-include src="'views/profile/templates/component/follow.view.client.html'">
+                </div>
+                <div ng-switch-when="REVIEW">
+                    <ng-include src="'views/profile/templates/component/review.view.client.html'">
+                </div>
+            </div>
         </div>
         <!--<div id="show" class="col-md-8 col-xs-12">-->
 
