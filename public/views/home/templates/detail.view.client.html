@@ -34,6 +34,15 @@
                        class="btn btn-danger btn-block">Remove bookmark</a>
                 </div>
             </div>
+            <div ng-show="model.loggedin">
+                <div ng-switch="model.checkedIn">
+                    <a ng-switch-when="false" role="button" ng-click="model.checkIn()"
+                       class="btn btn-primary btn-block">CheckIn</a>
+                    <p ng-switch-when="true"><i>CheckedIn here!</i></p>
+                </div>
+
+                </div>
+            </div>
 
 
     <h2>Location:</h2>

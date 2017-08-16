@@ -15,20 +15,20 @@
             <li class="list-group-item" ng-repeat="n in model.notification">
                 <div ng-switch="n.type">
                     <div ng-switch-when="REVIEW">
-                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> left a review for <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>, check it out!<br>
+                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> reviewed the venue: <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>, check it out!<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>
                     <div ng-switch-when="OFFER">
-                        <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a> just posted a new offer, don't miss it!<br>
+                        <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a> posted a new offer, don't miss it!<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>
                     <div ng-switch-when="STATUS">
-                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> updates their status:<br>
+                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> updated their status:<br>
                         {{n.text}}<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>
                     <div ng-switch-when="CHECKIN">
-                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> just checked in at <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>!<br>
+                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> checked in at <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a>!<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>
                 </div>

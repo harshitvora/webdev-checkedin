@@ -17,6 +17,7 @@
         model.createReview = createReview;
         model.updateReview = updateReview;
         model.deleteReview = deleteReview;
+        model.checkIn = checkIn;
 
         var vid = $routeParams["vid"];
         var currentUser;
@@ -26,6 +27,7 @@
         function init() {
             model.vid = vid;
             model.bookmarked = false;
+            model.checkedIn = false;
 
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
@@ -143,6 +145,13 @@
             reviewService.deleteReview(id).then(function (response) {
                 $route.reload();
             });
+        }
+
+        function checkIn() {
+            var notification = {type: "CHECKIN", _user: currentUser._id, _venue: vid};
+
+            notificationService.createNotification(notification);
+            model.checkedIn = true;
         }
     }
 })();
