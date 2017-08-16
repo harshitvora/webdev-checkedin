@@ -3,7 +3,7 @@
         .module("CheckedIn")
         .controller("profileController", profileController);
 
-    function profileController($routeParams, userService, reviewService, $location, $rootScope) {
+    function profileController($routeParams, userService, reviewService, notificationService, $location, $rootScope) {
         var model = this;
 
         //Event handles:
@@ -12,11 +12,13 @@
         model.unfollowUser = unfollowUser;
         model.toFollow = toFollow;
         model.toReview = toReview;
+        model.toggleInvite = toggleInvite;
+        model.addInvite = addInvite;
 
         var userId = $routeParams["uid"];
         var currentUser;
-
-
+        var inviteOn = false;
+        var user;
 
         function init() {
             model.currentTab = "REVIEW";
@@ -40,12 +42,14 @@
 
             userService.findUserByUserId(userId)
                 .then(function (response) {
+                    user = response;
                     model.user = response;
                     $rootScope.title = response.username+"'s profile";
                 });
 
             userService.findFollowingForUser(userId)
                 .then(function (response) {
+
                     model.following = response;
                 });
 
@@ -61,6 +65,21 @@
                 .then(function (response) {
                     $location.url("/login");
                 });
+        }
+
+        function toggleInvite() {
+            if(inviteOn){
+                inviteOn = false;
+                model.inviteOn = inviteOn;
+            } else {
+                inviteOn = true;
+                model.inviteOn = inviteOn;
+            }
+        }
+
+        function addInvite(text) {
+            notification = {type: "INVITE", _user: currentUser._id, _userFor: user._id , text: text};
+            notificationService.createNotification(notification);
         }
 
         function toFollow() {

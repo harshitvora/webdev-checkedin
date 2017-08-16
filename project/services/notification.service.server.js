@@ -46,7 +46,6 @@ function findNotificationsForFollower(req, res) {
     var arrayOfIds;
     userModel.findUserById(req.params.userId).then(function (response) {
         arrayOfIds = response.following;
-        console.log(arrayOfIds);
         notificationModel.findNotificationsForFollower(arrayOfIds)
             .then(function (notifications) {
                 console.log(notifications);

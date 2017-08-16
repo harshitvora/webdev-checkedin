@@ -8,6 +8,30 @@ var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname+'/../../public/uploads' });
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
+
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+// var FacebookStrategy = require('passport-facebook').Strategy;
+// var googleConfig = {
+//     clientID     : process.env.GOOGLE_CLIENT_ID,
+//     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
+//     callbackURL  : process.env.GOOGLE_CALLBACK_URL
+// };
+
+var googleConfig = {
+    clientID     : "239406439497-mkbhdpkq0fkmudsi5cvo0l97aofnenob.apps.googleusercontent.com",
+    clientSecret : "TK0ueRBOsNmMSrifA9Sgzel3",
+    callbackURL  : "http://localhost:3000/auth/google/callback"
+};
+passport.use(new GoogleStrategy(googleConfig, googleStrategy));
+
+// var facebookConfig = {
+//     // clientID: FACEBOOK_APP_ID,
+//     // clientSecret: FACEBOOK_APP_SECRET,
+//     callbackURL: "http://localhost:3000/auth/facebook/callback"
+// };
+//
+// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
 passport.deserializeUser(deserializeUser);
@@ -21,6 +45,24 @@ app.get("/api/user", findUserByCredentials);
 app.post("/api/login", passport.authenticate('local'), login);
 app.get("/api/loggedin", loggedin);
 app.delete("/api/logout", logout);
+app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+app.get('/auth/google/callback',
+    passport.authenticate('google', {
+        failureRedirect: '/#!/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/#!/user');
+    });
+
+app.get('/auth/facebook',
+    passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/#!/login' }),
+    function(req, res) {
+        // Successful authentication, redirect home.
+        res.redirect('/#!/user');
+    });
 
 app.post("/api/user", createUser);
 app.delete("/api/user/:userId", deleteUser);
@@ -120,6 +162,49 @@ function localStrategy(username, password, done) {
                 return done(err);
             }
         });
+}
+
+function googleStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByGoogleId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    var email = profile.emails[0].value;
+                    var emailParts = email.split("@");
+                    var newGoogleUser = {
+                        username:  emailParts[0],
+                        firstName: profile.name.givenName,
+                        lastName:  profile.name.familyName,
+                        email:     email,
+                        google: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newGoogleUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
+}
+
+function facebookStrategy(accessToken, refreshToken, profile, cb) {
+    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
+        return cb(err, user);
+    });
 }
 
 function login(req, res) {

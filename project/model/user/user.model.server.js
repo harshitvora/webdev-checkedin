@@ -17,6 +17,8 @@ userModel.deleteUser = deleteUser;
 userModel.followUser = followUser;
 userModel.unfollowUser = unfollowUser;
 userModel.findFollowingForUser = findFollowingForUser;
+userModel.findUserByGoogleId = findUserByGoogleId;
+userModel.findUserByFacebookId = findUserByFacebookId;
 module.exports = userModel;
 
 function createUser(user) {
@@ -76,4 +78,12 @@ function unfollowUser(userId, followId) {
             user.following.splice(index, 1);
             return user.save();
         })
+}
+
+function findUserByGoogleId(googleId) {
+    return userModel.findOne({'google.id': googleId});
+}
+
+function findUserByFacebookId(facebookId) {
+    return userModel.findOne({facebook: {id: facebookId}})
 }

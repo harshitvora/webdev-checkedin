@@ -54,6 +54,23 @@
                 <a ng-switch-when="true" role="button" ng-click="model.unfollowUser()"
                    class="btn btn-danger btn-block">Unfollow User</a>
             </div>
+
+            <div ng-show="!model.inviteOn"><a ng-click="model.toggleInvite()">Send Invite</a></div>
+            <div ng-show="model.inviteOn">
+                <label for="title">Your message:</label>
+                <input type="text"
+                       name="title"
+                       id="title"
+                       ng-model="text"
+                       placeholder="Message"
+                       class="form-control">
+                <a role="button" ng-click="model.addInvite(text)"
+                   class="btn btn-primary btn-block">Send</a>
+                <a ng-click="model.toggleInvite()">Cancel</a>
+            </div>
+
+
+
             <div ng-switch="model.currentTab">
                 <div ng-switch-when="FOLLOW">
                     <ng-include src="'views/profile/templates/component/follow.view.client.html'">
