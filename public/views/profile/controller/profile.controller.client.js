@@ -17,7 +17,6 @@
 
         var userId = $routeParams["uid"];
         var currentUser;
-        var inviteOn = false;
         var user;
 
         function init() {
@@ -65,21 +64,6 @@
                 .then(function (response) {
                     $location.url("/login");
                 });
-        }
-
-        function toggleInvite() {
-            if(inviteOn){
-                inviteOn = false;
-                model.inviteOn = inviteOn;
-            } else {
-                inviteOn = true;
-                model.inviteOn = inviteOn;
-            }
-        }
-
-        function addInvite(text) {
-            notification = {type: "INVITE", _user: currentUser._id, _userFor: user._id , text: text};
-            notificationService.createNotification(notification);
         }
 
         function toFollow() {

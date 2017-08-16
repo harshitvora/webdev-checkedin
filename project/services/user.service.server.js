@@ -10,7 +10,7 @@ var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-// var FacebookStrategy = require('passport-facebook').Strategy;
+var FacebookStrategy = require('passport-facebook').Strategy;
 // var googleConfig = {
 //     clientID     : process.env.GOOGLE_CLIENT_ID,
 //     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
@@ -25,12 +25,20 @@ var googleConfig = {
 passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 
 // var facebookConfig = {
-//     // clientID: FACEBOOK_APP_ID,
+//     clientID: FACEBOOK_APP_ID,
 //     // clientSecret: FACEBOOK_APP_SECRET,
 //     callbackURL: "http://localhost:3000/auth/facebook/callback"
 // };
-//
-// passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
+
+var facebookConfig = {
+    clientID: "717902075064245",
+    clientSecret: "27a170048ceebd36f66c1a49fdd8241f",
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
+};
+
+
+
+passport.use(new FacebookStrategy(facebookConfig, facebookStrategy));
 
 passport.use(new LocalStrategy(localStrategy));
 passport.serializeUser(serializeUser);
@@ -201,10 +209,42 @@ function googleStrategy(token, refreshToken, profile, done) {
         );
 }
 
-function facebookStrategy(accessToken, refreshToken, profile, cb) {
-    User.findOrCreate({ facebookId: profile.id }, function (err, user) {
-        return cb(err, user);
-    });
+function facebookStrategy(token, refreshToken, profile, done) {
+    userModel
+        .findUserByFacebookId(profile.id)
+        .then(
+            function(user) {
+                if(user) {
+                    return done(null, user);
+                } else {
+                    console.log(profile.emails);
+                    var name = profile.displayName.replace(" ", "");
+                    var fullname = profile.displayName.split(" ");
+                    var newFacebookUser = {
+                        username:  name,
+                        firstName: fullname[0],
+                        lastName:  fullname[1],
+                        // email:     email,
+                        facebook: {
+                            id:    profile.id,
+                            token: token
+                        }
+                    };
+                    return userModel.createUser(newFacebookUser);
+                }
+            },
+            function(err) {
+                if (err) { return done(err); }
+            }
+        )
+        .then(
+            function(user){
+                return done(null, user);
+            },
+            function(err){
+                if (err) { return done(err); }
+            }
+        );
 }
 
 function login(req, res) {
@@ -286,3 +326,26 @@ function deserializeUser(user, done) {
             }
         );
 }
+
+
+
+
+// <script>
+// window.fbAsyncInit = function() {
+//     FB.init({
+//         appId      : '717902075064245',
+//         cookie     : true,
+//         xfbml      : true,
+//         version    : 'v2.8'
+//     });
+//     FB.AppEvents.logPageView();
+// };
+//
+// (function(d, s, id){
+//     var js, fjs = d.getElementsByTagName(s)[0];
+//     if (d.getElementById(id)) {return;}
+//     js = d.createElement(s); js.id = id;
+//     js.src = "//connect.facebook.net/en_US/sdk.js";
+//     fjs.parentNode.insertBefore(js, fjs);
+// }(document, 'script', 'facebook-jssdk'));
+// </script>

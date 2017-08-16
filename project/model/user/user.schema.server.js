@@ -12,12 +12,15 @@ var userSchema = mongoose.Schema({
     email: String,
     phone: String,
     pictureUrl: String,
+    status: {type: String, default: "Hey there!"},
     following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
     bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],
     role: {type:String, enum:['CUSTOMER', 'MANAGER', 'ADMIN']},
     _venue: {type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'},
     google: {id: String,
     token: String},
+    facebook: {id: String,
+        token: String},
     dateCreated: {type: Date, default: Date.now}
 }, {collection: "user"});
 
