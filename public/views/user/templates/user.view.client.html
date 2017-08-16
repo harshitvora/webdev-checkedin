@@ -38,6 +38,13 @@
             <h1>Profile</h1>
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
             @{{model.user.username}}
+            Status: <input type="text"
+                   name="email"
+                   id="email"
+                   ng-model="model.user.status"
+                   placeholder="status"
+                   class="form-control">
+            <a ng-click="model.updateStatus(model.user)">Update</a>
             <a href="#!/user/edit" class="btn-default btn">Edit Profile</a>
             <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}" class="btn-default btn">Go to Venue page</a>
             <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}/manage" class="btn-default btn">Manage page</a>

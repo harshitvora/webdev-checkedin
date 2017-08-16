@@ -15,6 +15,7 @@
         model.deleteReview = deleteReview;
         model.unfollowUser = unfollowUser;
         model.unbookmarkVenue = unbookmarkVenue;
+        model.updateStatus = updateStatus;
 
         var userId = user._id;
         function init() {
@@ -93,6 +94,14 @@
                     $route.reload();
                 });
 
+        }
+
+        function updateStatus(user) {
+            userService.updateUser(user._id, user);
+
+            var notification = {type: "STATUS", _user: user._id, text: user.status};
+
+            notificationService.createNotification(notification);
         }
     }
 })();

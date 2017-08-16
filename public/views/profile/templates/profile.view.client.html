@@ -37,7 +37,8 @@
         <div class="col-xs-12 col-md-4 col-md-offset-4">
             <h1>Profile</h1>
             <h2>{{model.user.firstName}} {{model.user.lastName}}</h2>
-            @{{model.user.username}}
+            @{{model.user.username}}<br>
+            Status: <i>{{model.user.status}}</i>
         </div>
     </div>
     <div class="row">

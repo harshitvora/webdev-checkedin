@@ -12,8 +12,6 @@
         model.unfollowUser = unfollowUser;
         model.toFollow = toFollow;
         model.toReview = toReview;
-        model.toggleInvite = toggleInvite;
-        model.addInvite = addInvite;
 
         var userId = $routeParams["uid"];
         var currentUser;

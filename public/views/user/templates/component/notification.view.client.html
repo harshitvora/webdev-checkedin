@@ -22,8 +22,8 @@
                         <a href="#!/venue/{{n._venue._id}}"><b>{{n._venue.name}}</b></a> just posted a new offer, don't miss it!<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>
-                    <div ng-switch-when="INVITE">
-                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> invited you:<br>
+                    <div ng-switch-when="STATUS">
+                        <a href="#!/user/{{n._user._id}}"><b>{{n._user.username}}</b></a> updates their status:<br>
                         {{n.text}}<br>
                         <small>{{n.dateCreated | date}}</small>
                     </div>

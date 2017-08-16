@@ -121,7 +121,7 @@
                 }
             });
 
-            notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
+            var notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
 
             notificationService.createNotification(notification);
 
