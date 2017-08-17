@@ -1,3 +1,3 @@
 (function () {
-    angular.module("CheckedIn", ["ngRoute"]);
+    angular.module("CheckedIn", ["ngRoute", "ngRating"]);
 })();

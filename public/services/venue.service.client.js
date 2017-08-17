@@ -24,7 +24,7 @@
 
         var CLIENT_SECRET = "3UGFREITEOYUFAT0I2FK0YDL2SHDPS0IQEDMAN1F2FOGSD3I";
 
-        var GEO_API_KEY = "AIzaSyCkNxcZ_khMSiPIJ48hmOWElZ0yRWPf_Uk";
+        var GEO_API_KEY = "AIzaSyDmjkyUIuqFhtjJHInVo848M68jhB4fWxA";
 
         var GEO_URL = "https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY";
 
@@ -52,7 +52,7 @@
         }
 
         function getMapImage(lat, lng) {
-            var url = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lng+"&zoom=13&size=600x300&maptype=roadmap&markers=color:red|"+lat+","+lng+"&key="+GEO_API_KEY;
+            var url = "https://maps.googleapis.com/maps/embed/v1/view?center="+lat+","+lng+"&zoom=13&key="+GEO_API_KEY;
             return url;
         }
 

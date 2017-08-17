@@ -7,7 +7,7 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($rootScope, $routeParams, venueService, notificationService, userService, reviewService, $location, $route) {
+    function detailController($rootScope, $routeParams, venueService, notificationService, userService, reviewService, $location, $route, $sce) {
         var model = this;
 
         //Event handles:
@@ -30,6 +30,7 @@
             model.vid = vid;
             model.bookmarked = false;
             model.checkedIn = false;
+            model.isManager = false;
 
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
@@ -41,7 +42,7 @@
                             lng = venue.location.lng;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
                             model.imageUrl = imageUrl;
-                            model.mapUrl = venueService.getMapImage(lat,lng);
+                            model.mapUrl = trustUrl(venueService.getMapImage(lat,lng));
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
                             $rootScope.title = venue.name;
@@ -71,6 +72,9 @@
                             if(currentUser.bookmarks.includes(vid)){
                                 model.bookmarked = true;
                             }
+                            if(currentUser._venue === vid){
+                                model.isManager = true;
+                            }
                             reviewService.findReviewByCredentials(user._id ,vid).then(function (response) {
                                 model.userReview = response;
                             });
@@ -90,6 +94,10 @@
                 .then(function (response) {
                     $location.url("/venue/"+vid);
                 });
+        }
+
+        function trustUrl(url) {
+            return $sce.trustAsResourceUrl(url);
         }
 
         function bookmarkVenue() {

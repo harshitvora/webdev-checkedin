@@ -10,6 +10,7 @@
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="r in model.review">
                 <a href="#!/venue/{{r._venue}}">{{r.venueName}}</a><br>
+                <ng-rating ng-model="r.rating" editable="false"></ng-rating><br>
                 <b>{{r.title}}:</b><br>
                 {{r.text}}<br>
                 <small>{{r.dateCreated | date}}</small>
