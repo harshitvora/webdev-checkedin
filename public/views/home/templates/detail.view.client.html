@@ -13,10 +13,10 @@
             <ul class="nav navbar-nav">
                 <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
                 <li ng-show="model.user" ><a href="#!/user"><span class="fa fa-user"></span> {{model.user.username}}</a></li>
-                <li ng-show="!model.user"><a href="#!/login">Login</a></li>
-                <li ng-show="!model.user"><a href="#!/register">Register</a></li>
-                <li class="active" ng-show="model.user._venue"><a href="#!/venue/{{model.user._venue}}">Venue page</a></li>
-                <li ng-show="model.user"><a ng-click="model.logout()">Logout</a></li>
+                <li ng-show="!model.user"><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-show="!model.user"><a href="#!/register"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li class="active" ng-show="model.isManager"><a href="#!/venue/{{model.user._venue}}">Venue page</a></li>
+                <li ng-show="model.user"><a ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -49,7 +49,7 @@
         </div>
         <div class="col-xs-12 col-md-6">
             <div class="row">
-                <div class="col-xs-12 hv-container-map" style="margin: auto; text-align: center">
+                <div class="col-xs-12 hv-container-map" style="">
                     <img src="{{model.mapUrl}}" class="img-responsive" style="display: inline">
                 </div>
             </div>
@@ -117,17 +117,16 @@
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="review in model.reviews">
                             <ng-rating ng-model="review.rating" editable="false"></ng-rating><br>
-                            <b>{{review.title}}:</b><br>
-                            {{review.text}}<br>
+                            <h5>{{review.title}}:</h5>
                             <small>By <a href="#!/user/{{review._user._id}}">{{review._user.username}}</a> on {{review.dateCreated | date}}</small><br>
+                            {{review.text}}<br>
 
                             <ul class="list-group" ng-show="review.reply">
                             <li class="list-group-item">
-                                {{model.venue.name}} says:<br>
+                                <b>{{model.venue.name}} says:</b><br>
                                 {{review.reply}}
                             </li>
                             </ul>
-
                         </li>
                         <li class="list-group-item" ng-show="!model.reviews.length">
                             There are no reviews for this venue, be the first one to leave a review!

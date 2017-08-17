@@ -14,9 +14,9 @@
             <ul class="nav navbar-nav">
                 <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
                 <li ng-show="model.currentUser" ><a href="#!/user"><span class="fa fa-user"></span> {{model.currentUser.username}}</a></li>
-                <li ng-show="!model.currentUser"><a href="#!/login">Login</a></li>
-                <li ng-show="!model.currentUser"><a href="#!/register">Register</a></li>
-                <li ng-show="model.currentUser"><a ng-click="model.logout()">Logout</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/register"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li ng-show="model.currentUser"><a ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

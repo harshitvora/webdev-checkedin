@@ -26,7 +26,7 @@
                         model.currentUser = currentUser;
                     }
                 });
-            $rootScope.title = "Home";
+            $rootScope.title = "CheckedIn";
         }
         init();
 

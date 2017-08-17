@@ -12,6 +12,7 @@
         var userId = user._id;
 
         function init() {
+            model.user = user;
             userService.getAllUsers()
                 .then(function (response) {
                     model.users = response;

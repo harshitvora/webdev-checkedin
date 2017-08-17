@@ -14,9 +14,9 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="#"><span class="fa fa-search"></span> Search</a></li>
                 <li ng-show="model.currentUser" ><a href="#!/user"><span class="fa fa-user"></span> {{model.currentUser.username}}</a></li>
-                <li ng-show="!model.currentUser"><a href="#!/login">Login</a></li>
-                <li ng-show="!model.currentUser"><a href="#!/register">Register</a></li>
-                <li ng-show="model.currentUser"><a ng-click="model.logout()">Logout</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/register"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
+                <li ng-show="model.currentUser"><a ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
@@ -59,7 +59,7 @@
                 <div ng-show="result"><h4>Search results:</h4>
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="val in result.response.venues">
-                            <a href="#!/venue/{{val.id}}">{{val.name}}</a> at {{val.location.formattedAddress}}
+                            <a href="#!/venue/{{val.id}}">{{val.name}}</a>
                         </li>
                     </ul></div>
 

@@ -49,8 +49,10 @@ body{
 }
 
 .hv-container-map{
-    background-color: #f5f5f5;
+    background-color: white;
     padding: 5px;
+    margin: auto;
+    text-align: center
 }
 
 .hv-margin{
