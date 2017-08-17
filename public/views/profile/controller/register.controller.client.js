@@ -17,8 +17,7 @@
         function register(user) {
             userService.findUserByUsername(user.username)
                 .then(function (response) {
-                    _user = response;
-                    if(!_user){
+                    if(!response){
                         if(user.password === user.verifyPassword){
                             var newUser = {username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, role:"USER"};
                             return userService.createUser(newUser);
@@ -33,9 +32,8 @@
                     return;
                 })
                 .then(function (response) {
-                    newUser = response;
-                    if(newUser){
-                        login(newUser);
+                    if(response){
+                        login(user);
                     }
                     return;
                 });

@@ -58,6 +58,10 @@ function updateUser(userId, newUser) {
     return userModel.update({_id: userId}, {$set: newUser});
 }
 
+function createAdmin(userId) {
+    return userModel.update({_id: userId}, {role: "ADMIN"});
+}
+
 function deleteUser(userId) {
     return userModel
         .findById(userId)

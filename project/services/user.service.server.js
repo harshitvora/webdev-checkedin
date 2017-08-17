@@ -8,9 +8,9 @@ var multer = require('multer'); // npm install multer --save
 var upload = multer({ dest: __dirname+'/../../public/uploads' });
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
-
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var FacebookStrategy = require('passport-facebook').Strategy;
+var bcrypt = require("bcrypt-nodejs");
 // var googleConfig = {
 //     clientID     : process.env.GOOGLE_CLIENT_ID,
 //     clientSecret : process.env.GOOGLE_CLIENT_SECRET,
@@ -93,6 +93,7 @@ function getAllUsers(req, res) {
 
 function createUser(req, res) {
     var user = req.body;
+    user.password = bcrypt.hashSync(user.password);
     userModel.createUser(user)
         .then(function (user) {
             res.json(user);
@@ -172,12 +173,17 @@ function findUserByCredentials(req, res) {
 }
 
 function localStrategy(username, password, done) {
-    userModel.findUserByCredentials(username, password)
+
+    userModel.findUserByUsername(username)
         .then(function (user) {
             if(!user){
                 return done(null, false);
             }
-            return done(null, user);
+            if(user && bcrypt.compareSync(password, user.password)) {
+                return done(null, user);
+            } else {
+                return done(null, false);
+            }
         }, function (err) {
             if(err) {
                 return done(err);

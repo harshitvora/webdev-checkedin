@@ -85,7 +85,7 @@
                         venue._manager = newUser._id;
                         venueService.updateVenue(vid, venue).then(function (response) {
                             if(newUser){
-                                login(newUser);
+                                login(user);
                             }
                             return;
                         });
@@ -101,7 +101,7 @@
                             lng: lng};
                         venueService.createVenue(newVenue).then(function (response) {
                             if(newUser){
-                                login(newUser);
+                                login(user);
                             }
                             return;
                         })
@@ -132,7 +132,6 @@
                             imageUrl: imageUrl,
                             lat: lat,
                             lng: lng};
-                        console.log(newVenue);
                         venueService.createVenue(newVenue).then(function (response) {
                             $location.url("/venue/"+vid);
                         })
