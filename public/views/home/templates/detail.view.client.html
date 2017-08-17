@@ -14,7 +14,6 @@
                 <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
                 <li ng-show="model.user" ><a href="#!/user"><span class="fa fa-user"></span> {{model.user.username}}</a></li>
                 <li ng-show="!model.user"><a href="#!/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li ng-show="!model.user"><a href="#!/register"><span class="glyphicon glyphicon-edit"></span> Register</a></li>
                 <li class="active" ng-show="model.isManager"><a href="#!/venue/{{model.user._venue}}">Venue page</a></li>
                 <li ng-show="model.user"><a ng-click="model.logout()"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
@@ -28,9 +27,9 @@
             <img class="img-responsive img-thumbnail" src="{{model.imageUrl}}">
             <h4>{{model.venue.name}}</h4>
             <p class="btn" style="background-color: #{{model.venue.ratingColor}}">{{model.venue.rating}}</p>
-            <h4>Location:</h4>
+            <h5 ng-show="model.venue.location">Location:</h5>
             {{model.venue.location}}
-            <h4>Timings:</h4>
+            <h5 ng-show="model.venue.hours.status">Timings:</h5>
             {{model.venue.hours.status}}
 
             <a ng-show="model.isManager" href="#!/venue/{{model.user._venue}}/manage" target="_blank" class="btn-default btn-block btn">Manage page</a>
@@ -86,7 +85,7 @@
                            class="btn btn-primary btn-block">Post</a>
                     </div>
                     <div ng-show="model.userReview">
-                        <label for="review">Your Review:</label>
+                        <label for="review">Your Review:</label><br>
                         <ng-rating ng-model="model.userReview.rating" editable="true"></ng-rating>
                         <div class="form-group">
                             <input type="text"

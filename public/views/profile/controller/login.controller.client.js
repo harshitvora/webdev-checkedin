@@ -22,9 +22,7 @@
                         model.errorMessage = "Wrong username or password!";
                     }
                     else {
-                        console.log(_user.role);
                         if(_user.role === "ADMIN"){
-                            console.log("test");
                             $location.url("admin/");
                         } else {
                             $rootScope.currentUser = _user;

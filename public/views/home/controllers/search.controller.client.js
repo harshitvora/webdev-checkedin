@@ -19,8 +19,6 @@
 
         function init() {
 
-            console.log($rootScope.location);
-
             if($location.search().type === "name"){
                 searchVenueByName($location.search().location, $location.search().name);
                 $rootScope.location = $location.search().location;

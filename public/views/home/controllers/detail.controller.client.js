@@ -37,7 +37,6 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
-                            console.log(venue);
                             lat = venue.location.lat;
                             lng = venue.location.lng;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
@@ -92,7 +91,7 @@
         function logout() {
             userService.logout()
                 .then(function (response) {
-                    $location.url("/venue/"+vid);
+                    $route.reload();
                 });
         }
 
@@ -100,7 +99,6 @@
 
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
-                    console.log(venue.location);
                     var newVenue = {_id: vid,
                         name: venue.name,
                         location: venue.location.formattedAddress,
@@ -109,7 +107,6 @@
                         imageUrl: imageUrl,
                         lat: lat,
                         lng: lng};
-                    console.log(newVenue);
                     venueService.createVenue(newVenue);
                 }
             });

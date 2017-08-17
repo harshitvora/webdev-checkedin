@@ -67,7 +67,6 @@
             var url = "/api/review?userId="+userId+"&venueId="+venueId;
             return $http.get(url)
                 .then(function (response) {
-                    console.log(response.data);
                     return response.data;
                 });
         }

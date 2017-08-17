@@ -48,7 +48,6 @@ function findNotificationsForFollower(req, res) {
         arrayOfIds = response.following;
         notificationModel.findNotificationsForFollower(arrayOfIds)
             .then(function (notifications) {
-                console.log(notifications);
                 res.json(notifications);
             }, function (err) {
                 res.sendStatus(404).send(err);

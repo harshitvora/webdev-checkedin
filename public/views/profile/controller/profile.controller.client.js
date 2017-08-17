@@ -90,7 +90,6 @@
             } else {
                 userService.followUser(currentUser._id, userId)
                     .then(function (response) {
-                        console.log(response);
                         model.followed = true;
                     });
             }
@@ -99,7 +98,6 @@
         function unfollowUser() {
             userService.unfollowUser(currentUser._id, userId)
                 .then(function (response) {
-                    console.log(response);
                     model.followed = false;
                 });
 

@@ -105,7 +105,6 @@
         function bookmarkVenue(userId, venueId) {
             return $http.post("/api/user/"+userId+"/bookmark/"+venueId)
                 .then(function (response) {
-                    console.log(response.data);
                     return response.data;
                 });
         }

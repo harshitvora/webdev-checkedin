@@ -267,7 +267,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
 
 function login(req, res) {
     var user = req.user;
-    console.log(user);
     res.json(user);
 }
 
@@ -320,7 +319,6 @@ function uploadImage(req, res) {
             user.pictureUrl = '/uploads/'+filename;
             userModel.updateUser(userId, user)
                 .then(function (user) {
-                    console.log(user);
                 });
         });
 
