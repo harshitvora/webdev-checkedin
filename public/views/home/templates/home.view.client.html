@@ -11,39 +11,41 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#!/user">Profile</a></li>
-                <li><a href="#!/login">Login</a></li>
-                <li><a href="#!/register">Register</a></li>
+                <li class="active"><a href="#"><span class="fa fa-search"></span> Search</a></li>
+                <li ng-show="model.currentUser" ><a href="#!/user"><span class="fa fa-user"></span> {{model.currentUser.username}}</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/login">Login</a></li>
+                <li ng-show="!model.currentUser"><a href="#!/register">Register</a></li>
+                <li ng-show="model.currentUser"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>
 </nav>
 
-<div class="container hv-padding" role="main">
+<div class="container" role="main">
     <div class="row">
-        <div class="col-xs-12 col-md-6 col-md-offset-3">
-            <br>
-            <div class="jumbotron">
+        <div class="col-md-6 col-md-offset-3 hv-container hv-text-center">
                 <h1>CheckedIn</h1>
-                <!--<p ng-show="model.currentUser">Hi, {{model.currentUser.username}}!-->
-                <!--<p ng-show="model.currentUser">Here's your <a href="#!/user/{{model.currentUser._id}}"><b>profile</b></a></p>-->
-                <p>This is a Website to check out places and events.</p>
+                <div class="hidden-sm hidden-xs"><p>Find the best places to eat, drink, shop, or visit around you.</p></div>
+        </div>
+    </div>
+    <div class="hv-spacing"></div>
+    <div class="row">
+        <div class="col-md-6 col-md-offset-3 hv-container">
                 <div ng-switch="toggle">
                     <div class="row" ng-switch-when="name">
                         <div class="col-xs-12">
-                            <h2>Search venue by name</h2>
-                            <input type="text" placeholder="What are you looking for?" ng-model="name" class="form-control">
-                            <input type="text" placeholder="Where are you looking?" ng-model="location" class="form-control">
-                            <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByName(location, name)">Search</a>
-                            or search by your current location <a ng-click="model.toggleSearch()">Toggle</a>
+                            <h4>Search by place</h4>
+                            What are you looking for and where are you?
+                            <input type="text" placeholder="I'm looking for..." ng-model="name" class="form-control">
+                            <input type="text" placeholder="I'm at..." ng-model="location" class="form-control">
+                            <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByName(location, name)"><span class="fa fa-search"></span> Search</a>
+                            <h4>or search by <a ng-click="model.toggleSearch()">location <span class="fa fa-chevron-circle-right"></span></a></h4>
                         </div>
                     </div>
                     <div class="row" ng-switch-when="location">
                         <div class="col-xs-12">
-                            <h2>Search venues by your location</h2>
-                            Category:
+                            <h4>Search by location</h4>
+                            What kind of a place are you looking for?
                             <div class="radio">
                                 <label><input type="radio" ng-model="category" value="4d4b7105d754a06374d81259" name="category">Food</label>
                             </div>
@@ -56,13 +58,11 @@
                             <div class="radio">
                                 <label><input type="radio" ng-model="category" value="4d4b7105d754a06378d81259" name="category">Shop & service</label>
                             </div>
-
-                            <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByLocation(category)">Find places around me</a>
-                            or search by name <a ng-click="model.toggleSearch()">Toggle</a>
+                            <a class="btn btn-primary btn-block form-control" ng-click="model.searchVenueByLocation(category)"><span class="fa fa-search"></span> Search places around me</a>
+                            <h4>or search by <a ng-click="model.toggleSearch()">place <span class="fa fa-chevron-circle-right"></span></a></h4>
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
     </div>
 </div>

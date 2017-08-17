@@ -12,6 +12,7 @@
             "updateUser": updateUser,
             "deleteUser": deleteUser,
             "findFollowingForUser": findFollowingForUser,
+            "findFollowersForUser": findFollowersForUser,
             "followUser": followUser,
             "unfollowUser": unfollowUser,
             "login": login,
@@ -40,8 +41,9 @@
             var url = "/api/login";
             return $http.post(url, {username: username, password: password})
                 .then(function (response) {
-                    console.log(response.data);
                     return response.data;
+                }, function (response) {
+                    return null;
                 });
         }
 
@@ -99,6 +101,14 @@
 
         function findFollowingForUser(userId) {
             return $http.get("/api/user/"+userId+"/following")
+                .then(function (response) {
+                    return response.data;
+                });
+
+        }
+
+        function findFollowersForUser(userId) {
+            return $http.get("/api/user/"+userId+"/followers")
                 .then(function (response) {
                     return response.data;
                 });

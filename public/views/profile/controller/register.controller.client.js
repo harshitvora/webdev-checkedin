@@ -20,7 +20,7 @@
                     _user = response;
                     if(!_user){
                         if(user.password === user.verifyPassword){
-                            var newUser = {username: user.username, password: user.password};
+                            var newUser = {username: user.username, password: user.password, role:"USER"};
                             return userService.createUser(newUser);
                         }
                         else {

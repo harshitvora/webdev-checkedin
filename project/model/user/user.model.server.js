@@ -17,6 +17,7 @@ userModel.deleteUser = deleteUser;
 userModel.followUser = followUser;
 userModel.unfollowUser = unfollowUser;
 userModel.findFollowingForUser = findFollowingForUser;
+userModel.findFollowersForUser = findFollowersForUser;
 userModel.findUserByGoogleId = findUserByGoogleId;
 userModel.findUserByFacebookId = findUserByFacebookId;
 module.exports = userModel;
@@ -32,6 +33,12 @@ function findUserById(id) {
 function findFollowingForUser(userId) {
     return userModel.findById(userId)
         .populate('following')
+        .exec();
+}
+
+function findFollowersForUser(userId) {
+    return userModel.findById(userId)
+        .populate('followers')
         .exec();
 }
 
@@ -63,11 +70,15 @@ function deleteUser(userId) {
 
 function followUser(userId, followId) {
     return userModel
-        .findById(userId)
+        .findById(followId)
         .then(function (user) {
+            user.followers.push(userId);
+            user.save();
+            return userModel.findById(userId);
+        }).then(function (user) {
             user.following.push(followId);
             return user.save();
-        })
+        });
 }
 
 function unfollowUser(userId, followId) {
@@ -76,8 +87,15 @@ function unfollowUser(userId, followId) {
         .then(function (user) {
             var index = user.following.indexOf(followId);
             user.following.splice(index, 1);
-            return user.save();
-        })
+            user.save();
+            userModel
+                .findById(followId)
+                .then(function (user) {
+                    var index = user.followers.indexOf(userId);
+                    user.followers.splice(index, 1);
+                    return user.save();
+                });
+        });
 }
 
 function findUserByGoogleId(googleId) {
@@ -85,5 +103,5 @@ function findUserByGoogleId(googleId) {
 }
 
 function findUserByFacebookId(facebookId) {
-    return userModel.findOne({facebook: {id: facebookId}})
+    return userModel.findOne({'facebook.id': facebookId});
 }

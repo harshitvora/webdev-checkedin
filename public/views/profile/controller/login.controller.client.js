@@ -18,6 +18,7 @@
             userService.login(user.username, user.password)
                 .then(function (response) {
                     var _user = response;
+                    console.log(response);
                     if(!_user){
                         model.errorMessage = "Wrong username or password!";
                     }

@@ -33,7 +33,8 @@
         function logout() {
             userService.logout()
                 .then(function (response) {
-                    $location.url("/login");
+                    model.currentUser = "";
+                    $route.reload();
                 });
         }
 

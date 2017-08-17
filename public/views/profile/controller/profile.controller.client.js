@@ -28,6 +28,7 @@
                         currentUser = null;
                     } else {
                         currentUser = user;
+                        model.currentUser = user;
                         if(currentUser._id == userId){
                             $location.url("/user");
                         }

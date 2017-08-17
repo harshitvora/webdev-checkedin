@@ -27,7 +27,7 @@ passport.use(new GoogleStrategy(googleConfig, googleStrategy));
 // var facebookConfig = {
 //     clientID: FACEBOOK_APP_ID,
 //     // clientSecret: FACEBOOK_APP_SECRET,
-//     callbackURL: "http://localhost:3000/auth/facebook/callback"
+//     callbackURL: FACEBOOK_CALLBACK_URL
 // };
 
 var facebookConfig = {
@@ -48,6 +48,10 @@ passport.deserializeUser(deserializeUser);
 app.get("/api/users", getAllUsers);
 app.get("/api/user/:userId", findUserById);
 app.get("/api/user/:userId/following", findFollowingForUser);
+app.get("/api/user/:userId/followers", findFollowersForUser);
+
+
+
 app.post("/api/user/:userId/following/:followId", followUser);
 app.get("/api/user", findUserByCredentials);
 app.post("/api/login", passport.authenticate('local'), login);
@@ -110,6 +114,15 @@ function findFollowingForUser(req, res) {
     userModel.findFollowingForUser(req.params.userId)
         .then(function (user) {
             res.json(user.following);
+        }, function (err) {
+            res.sendStatus(404).send(err);
+        });
+}
+
+function findFollowersForUser(req, res) {
+    userModel.findFollowersForUser(req.params.userId)
+        .then(function (user) {
+            res.json(user.followers);
         }, function (err) {
             res.sendStatus(404).send(err);
         });
@@ -217,7 +230,6 @@ function facebookStrategy(token, refreshToken, profile, done) {
                 if(user) {
                     return done(null, user);
                 } else {
-                    console.log(profile.emails);
                     var name = profile.displayName.replace(" ", "");
                     var fullname = profile.displayName.split(" ");
                     var newFacebookUser = {
@@ -249,6 +261,7 @@ function facebookStrategy(token, refreshToken, profile, done) {
 
 function login(req, res) {
     var user = req.user;
+    console.log(user);
     res.json(user);
 }
 

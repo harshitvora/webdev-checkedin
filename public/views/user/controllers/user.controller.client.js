@@ -9,11 +9,13 @@
         //Event handles:
         model.logout = logout;
         model.toNotification = toNotification;
-        model.toFollow = toFollow;
+        model.toFollowing = toFollowing;
+        model.toFollower = toFollower;
         model.toBookmark = toBookmark;
         model.toReview = toReview;
         model.deleteReview = deleteReview;
         model.unfollowUser = unfollowUser;
+        model.removeFollower = removeFollower;
         model.unbookmarkVenue = unbookmarkVenue;
         model.updateStatus = updateStatus;
 
@@ -32,6 +34,11 @@
                     model.following = response;
                 });
 
+            userService.findFollowersForUser(userId)
+                .then(function (response) {
+                    model.followers = response;
+                });
+
             venueService.findVenuesForUser(userId)
                 .then(function (response) {
                     model.bookmark = response;
@@ -43,7 +50,6 @@
                 });
 
             notificationService.findNotificationsForFollower(userId).then(function (response) {
-                console.log(response);
                 model.notification = response.reverse();
             });
         }
@@ -60,8 +66,12 @@
             model.currentTab = "NOTIFICATION";
         }
 
-        function toFollow() {
-            model.currentTab = "FOLLOW";
+        function toFollowing() {
+            model.currentTab = "FOLLOWING";
+        }
+
+        function toFollower() {
+            model.currentTab = "FOLLOWERS";
         }
 
         function toBookmark() {
@@ -86,6 +96,13 @@
                     $route.reload();
                 });
 
+        }
+
+        function removeFollower(followId) {
+            userService.unfollowUser(followId, userId)
+                .then(function (response) {
+                    $route.reload();
+                });
         }
 
         function unbookmarkVenue(venueId) {
