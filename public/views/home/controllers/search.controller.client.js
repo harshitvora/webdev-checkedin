@@ -6,15 +6,35 @@
         .module("CheckedIn")
         .controller("searchController", searchController);
 
-    function searchController(venueService) {
+    function searchController(userService, venueService, $rootScope, $location) {
         var model = this;
 
         model.searchVenueByName = searchVenueByName;
         model.searchVenueByLocation = searchVenueByLocation;
 
 
+        var currentUser;
 
         function init() {
+
+            if($location.search().type === "name"){
+                searchVenueByName($location.search().location, $location.search().name);
+            } else if($location.search().type === "location"){
+                searchVenueByLocation($location.search().category);
+            }
+            console.log($location.search().type);
+
+            userService.loggedin()
+                .then(function (user) {
+                    if(user == 0){
+                        currentUser = null;
+                    } else {
+                        currentUser = user;
+                        model.currentUser = currentUser;
+                    }
+                });
+
+            $rootScope.title = "Search";
 
         }
 
@@ -24,7 +44,7 @@
         function searchVenueByName(location, name) {
             venueService.searchVenueByName(location, name)
                 .then(function (response) {
-                    model.result = response;
+                    $rootScope.result = response;
                 })
         }
 
@@ -34,7 +54,7 @@
                 var lng = position.coords.longitude;
                 venueService.searchVenueByLocation(lat, lng, category)
                     .then(function (response) {
-                        model.result = response;
+                        $rootScope.result = response;
                     });
             })
         }

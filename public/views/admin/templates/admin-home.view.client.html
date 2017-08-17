@@ -1,0 +1,44 @@
+
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">CheckedIn</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
+                <li class="active"><a href="#!/user"><span class="fa fa-user"></span> Admin</a></li>
+                <li><a ng-click="model.logout()">Logout</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+
+
+    </div>
+</nav>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-md-2 col-md-offset-2 hv-container hv-margin">
+            <img class="img-responsive" src="https://www.bettercloud.com/wp-content/uploads/nexusae0_icon2.png">
+            <h5>{{model.user.username}}</h5>
+        </div>
+
+        <div class="col-xs-12 col-md-6 hv-container hv-margin">
+            <h4>Users:</h4>
+            <ul class="list-group">
+                <li class="list-group-item" ng-repeat="user in model.users">
+                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                </li>
+                <li class="list-group-item" ng-show="!model.users.length">
+                    There are no users :(
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+

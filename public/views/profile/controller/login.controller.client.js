@@ -18,13 +18,18 @@
             userService.login(user.username, user.password)
                 .then(function (response) {
                     var _user = response;
-                    console.log(response);
                     if(!_user){
                         model.errorMessage = "Wrong username or password!";
                     }
                     else {
-                        $rootScope.currentUser = _user;
-                        $location.url("user/");
+                        console.log(_user.role);
+                        if(_user.role === "ADMIN"){
+                            console.log("test");
+                            $location.url("admin/");
+                        } else {
+                            $rootScope.currentUser = _user;
+                            $location.url("user/");
+                        }
                     }
                 });
 

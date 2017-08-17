@@ -61,6 +61,13 @@
                 resolve:{
                     user: loggedin
                 }})
+            .when("/admin", {
+                templateUrl: "views/admin/templates/admin-home.view.client.html",
+                controller: "adminHomeController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
     }
 
     function loggedin(userService, $q, $location) {

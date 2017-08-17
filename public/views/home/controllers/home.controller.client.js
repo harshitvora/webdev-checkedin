@@ -53,24 +53,12 @@
         function searchVenueByName(location, name) {
             $rootScope.location = location;
             $rootScope.name = name;
-            venueService.searchVenueByName(location, name)
-                .then(function (response) {
-                    $rootScope.result = response;
-                    $location.url("/search");
-                })
+            $location.url("/search?type=name&location="+location+"&name="+name);
         }
 
         function searchVenueByLocation(category) {
             $rootScope.category = category;
-            navigator.geolocation.getCurrentPosition(function (position) {
-                var lat = position.coords.latitude;
-                var lng = position.coords.longitude;
-                venueService.searchVenueByLocation(lat, lng, category)
-                    .then(function (response) {
-                        $rootScope.result = response;
-                        $location.url("/search");
-                    });
-            })
+            $location.url("/search?type=location&category="+category);
         }
 
 
