@@ -52,7 +52,7 @@
         }
 
         function getMapImage(lat, lng) {
-            var url = "https://maps.googleapis.com/maps/embed/v1/view?center="+lat+","+lng+"&zoom=13&key="+GEO_API_KEY;
+            var url = "https://maps.googleapis.com/maps/api/staticmap?center="+lat+","+lng+"&zoom=15&size=2000x300&maptype=roadmap&markers=color:red|"+lat+","+lng+"&key="+GEO_API_KEY;
             return url;
         }
 

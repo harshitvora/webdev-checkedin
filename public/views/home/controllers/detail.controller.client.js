@@ -7,7 +7,7 @@
         .module("CheckedIn")
         .controller("detailController", detailController);
 
-    function detailController($rootScope, $routeParams, venueService, notificationService, userService, reviewService, $location, $route, $sce) {
+    function detailController($rootScope, $routeParams, venueService, notificationService, userService, reviewService, $location, $route) {
         var model = this;
 
         //Event handles:
@@ -42,7 +42,7 @@
                             lng = venue.location.lng;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
                             model.imageUrl = imageUrl;
-                            model.mapUrl = trustUrl(venueService.getMapImage(lat,lng));
+                            model.mapUrl = venueService.getMapImage(lat,lng);
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
                             $rootScope.title = venue.name;
@@ -94,10 +94,6 @@
                 .then(function (response) {
                     $location.url("/venue/"+vid);
                 });
-        }
-
-        function trustUrl(url) {
-            return $sce.trustAsResourceUrl(url);
         }
 
         function bookmarkVenue() {

@@ -25,7 +25,7 @@
     <div class="row">
 
         <div class="col-xs-12 col-md-2 col-md-offset-2 hv-container hv-margin">
-            <img class="img-responsive" src="{{model.imageUrl}}">
+            <img class="img-responsive img-thumbnail" src="{{model.imageUrl}}">
             <h4>{{model.venue.name}}</h4>
             <p class="btn" style="background-color: #{{model.venue.ratingColor}}">{{model.venue.rating}}</p>
             <h4>Location:</h4>
@@ -49,14 +49,8 @@
         </div>
         <div class="col-xs-12 col-md-6">
             <div class="row">
-                <div class="col-xs-12 hv-container-map">
-                    <iframe
-                            width="auto"
-                            height="auto"
-                            frameborder="0" style="border:0"
-                            src="{{model.mapUrl}}" allowfullscreen>
-                    </iframe>
-                    <!--<img src="{{model.mapUrl}}" class="img-responsive">-->
+                <div class="col-xs-12 hv-container-map" style="margin: auto; text-align: center">
+                    <img src="{{model.mapUrl}}" class="img-responsive" style="display: inline">
                 </div>
             </div>
             <div class="row hv-spacing"></div>
@@ -116,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row hv-spacing" ng-show="model.loggedin" ng-hide="model.isManager"></div>
+            <div class="row hv-spacing" ng-show="model.loggedin"></div>
             <div class="row">
                 <ul class="col-xs-12 hv-container">
                     <h4>Reviews:</h4>
