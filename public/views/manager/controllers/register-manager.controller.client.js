@@ -29,11 +29,12 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
-                            venue.location = venue.location.formattedAddress;
                             lat = venue.location.lat;
                             lng = venue.location.lng;
+                            venue.location = venue.location.formattedAddress;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
                             model.venue = venue;
+                            model.venue._id = venue.id;
                             $rootScope.title = venue.name;
                         });
                 }
@@ -54,7 +55,7 @@
                         model.loggedin = true;
                         model.uid = user._id;
                         currentUser = user;
-                        model.user = currentUser;
+                        model.currentUser = currentUser;
                     }
                 });
         }
@@ -63,7 +64,7 @@
         function register(user) {
             userService.findUserByUsername(user.username)
                 .then(function (response) {
-                    _user = response;
+                    var _user = response;
                     if(!_user){
                         if(user.password === user.verifyPassword){
                             var newUser = {username: user.username, password: user.password, role:  "MANAGER", _venue: vid};
@@ -93,7 +94,11 @@
                             name: venue.name,
                             location: venue.location.formattedAddress,
                             rating: venue.rating,
-                            _manager: newUser._id};
+                            ratingColor: venue.ratingColor,
+                            _manager: newUser._id,
+                            imageUrl: imageUrl,
+                            lat: lat,
+                            lng: lng};
                         venueService.createVenue(newVenue).then(function (response) {
                             if(newUser){
                                 login(newUser);
@@ -106,13 +111,14 @@
         }
 
         function registerManager() {
+            console.log(currentUser);
             currentUser.role = "MANAGER";
             currentUser._venue = vid;
             userService.updateUser(currentUser._id, currentUser)
                 .then(function (response) {
                     var newUser = response;
                     if(venueExists){
-                        venue._manager = newUser._id;
+                        venue._manager = currentUser._id;
                         venueService.updateVenue(vid, venue).then(function (response) {
                             $location.url("/venue/"+vid);
                         });
@@ -122,10 +128,11 @@
                             location: venue.location.formattedAddress,
                             rating: venue.rating,
                             ratingColor: venue.ratingColor,
-                            _manager: newUser._id,
+                            _manager: currentUser._id,
                             imageUrl: imageUrl,
                             lat: lat,
                             lng: lng};
+                        console.log(newVenue);
                         venueService.createVenue(newVenue).then(function (response) {
                             $location.url("/venue/"+vid);
                         })

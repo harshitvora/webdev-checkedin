@@ -26,7 +26,7 @@
             <h3>Register as manager for {{model.venue.name}}</h3>
             <div ng-show="model.error" class="alert alert-danger">{{model.error}}</div>
             <div ng-show="model.errorMessage" class="alert alert-danger">{{model.errorMessage}}</div>
-            <div ng-show="!model.user">
+            <div ng-show="!model.currentUser">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text"
@@ -59,7 +59,7 @@
                 <a href="#!/venue/{{model.venue._id}}"
                    class="btn btn-danger btn-block">Cancel</a>
             </div>
-            <div ng-show="model.user">
+            <div ng-show="model.currentUser">
                 <a ng-click="model.registerManager()"
                    class="btn btn-primary btn-block">Click to become manager</a>
             </div>
