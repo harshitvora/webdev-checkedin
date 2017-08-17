@@ -54,8 +54,6 @@
                     $rootScope.title = venue.name;
                 }
 
-
-
                 userService.loggedin()
                     .then(function (user) {
                         if(user == 0){
@@ -74,16 +72,11 @@
                             });
                         }
                     });
-
             });
-
 
             reviewService.findReviewsForVenue(vid).then(function (response) {
                 model.reviews = response.reverse();
             });
-
-
-
         }
 
         init();
@@ -91,7 +84,7 @@
         function logout() {
             userService.logout()
                 .then(function (response) {
-                    $location.url("/login");
+                    $location.url("/venue/"+vid);
                 });
         }
 
