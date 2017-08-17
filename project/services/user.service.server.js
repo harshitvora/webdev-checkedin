@@ -318,7 +318,7 @@ function uploadImage(req, res) {
                 });
         });
 
-    var callbackUrl = "/#!/user/"+userId+"/edit";
+    var callbackUrl = "/#!/user";
 
     res.redirect(callbackUrl);
 }

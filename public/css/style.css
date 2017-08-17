@@ -31,6 +31,10 @@ body{
     background-color: #d3ecff;
 }
 
+.hv-glyphicon{
+    margin-right: 10px;
+}
+
 .hv-text-center{
     text-align: center;
 }

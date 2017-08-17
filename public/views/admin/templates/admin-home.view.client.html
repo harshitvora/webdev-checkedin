@@ -13,7 +13,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
-                <li class="active"><a href="#!/user"><span class="fa fa-user"></span> Admin</a></li>
+                <li class="active"><a href="#!/admin"><span class="fa fa-user"></span> Admin</a></li>
                 <li><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -28,13 +28,19 @@
             <h5>{{model.user.username}}</h5>
         </div>
 
-        <div class="col-xs-12 col-md-6 hv-container hv-margin">
+        <div class="col-xs-12 col-md-6 hv-container">
             <h4>Users:</h4>
+            <a href="#!/admin/create" class="btn btn-block btn-success">Create User</a><br>
             <ul class="list-group">
-                <li class="list-group-item" ng-repeat="user in model.users">
-                    <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                <div ng-repeat="user in model.users">
+                <li class="list-group-item" ng-hide="user.role == 'ADMIN'">
+                        <a href="#!/user/{{user._id}}">{{user.username}}</a>
+                        <a class="pull-right" ng-click="model.deleteUser(user._id)">
+                            <span class="glyphicon glyphicon-remove"></span> </a>
+                        <a class="pull-right" href="#!/admin/edit/{{user._id}}"> <span class="glyphicon glyphicon-pencil hv-glyphicon"></span></a>
                 </li>
-                <li class="list-group-item" ng-show="!model.users.length">
+                </div>
+                <li class="list-group-item" ng-show="model.users.length == 1">
                     There are no users :(
                 </li>
             </ul>

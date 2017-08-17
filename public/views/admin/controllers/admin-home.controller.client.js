@@ -12,21 +12,20 @@
 
         //Event handles:
         model.logout = logout;
-        model.deleteReview = deleteReview;
-        model.unfollowUser = unfollowUser;
-        model.removeFollower = removeFollower;
+        model.deleteUser = deleteUser;
 
         var userId = user._id;
         function init() {
 
             userService.findUserByUserId(userId)
-                .then(function (response) {
-                    model.user = response;
+                .then(function (user) {
+                    model.user = user;
+                    userService.getAllUsers()
+                        .then(function (response) {
+                            model.users = response;
+                        });
                 });
-            userService.getAllUsers()
-                .then(function (response) {
-                    model.users = response;
-                });
+
             $rootScope.title = "Admin";
 
         }
@@ -39,27 +38,12 @@
                 });
         }
 
-        function deleteReview(reviewId) {
-            reviewService.deleteReview(reviewId)
+        function deleteUser(userId) {
+            userService.deleteUser(userId)
                 .then(function (response) {
                     $route.reload();
                 });
 
-        }
-
-        function unfollowUser(followId) {
-            userService.unfollowUser(userId, followId)
-                .then(function (response) {
-                    $route.reload();
-                });
-
-        }
-
-        function removeFollower(followId) {
-            userService.unfollowUser(followId, userId)
-                .then(function (response) {
-                    $route.reload();
-                });
         }
     }
 })();

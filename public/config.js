@@ -68,6 +68,20 @@
                 resolve:{
                     user: loggedin
                 }})
+            .when("/admin/create", {
+                templateUrl: "views/admin/templates/admin-create.view.client.html",
+                controller: "adminCreateController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
+            .when("/admin/edit/:uid", {
+                templateUrl: "views/admin/templates/admin-edit.view.client.html",
+                controller: "adminEditController",
+                controllerAs: "model",
+                resolve:{
+                    user: loggedin
+                }})
     }
 
     function loggedin(userService, $q, $location) {

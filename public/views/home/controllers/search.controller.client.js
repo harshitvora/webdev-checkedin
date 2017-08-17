@@ -22,8 +22,6 @@
             } else if($location.search().type === "location"){
                 searchVenueByLocation($location.search().category);
             }
-            console.log($location.search().type);
-
             userService.loggedin()
                 .then(function (user) {
                     if(user == 0){

@@ -27,6 +27,9 @@
             userService.findUserByUserId(userId)
                 .then(function (response) {
                     model.user = response;
+                    if(response.role === "ADMIN"){
+                        $location.url("/admin");
+                    }
                 });
             $rootScope.title = "Your profile";
             userService.findFollowingForUser(userId)
