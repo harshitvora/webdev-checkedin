@@ -44,6 +44,11 @@ body{
     padding: 25px;
 }
 
+.hv-margin{
+    margin-right: 15px;
+    margin-bottom: 15px;
+}
+
 .hv-widget{
     position: relative;
 }

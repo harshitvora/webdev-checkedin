@@ -11,7 +11,7 @@ var userSchema = mongoose.Schema({
     lastName: String,
     email: String,
     phone: String,
-    pictureUrl: String,
+    pictureUrl: {type: String, default: "/uploads/2cf04bc440827ec236b91b87d788ce97"},
     location: String,
     status: {type: String, default: "Hey there!"},
     following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],

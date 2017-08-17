@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-xs-12 col-md-4 col-md-offset-4">
+    <div class="col-xs-12 col-md-6 hv-container">
         <ul class="nav nav-tabs">
             <li class="active"><a ng-click="model.toNotification()">Notifications</a></li>
             <li><a ng-click="model.toFollowing()">Following ({{model.following.length}})</a></li>
@@ -7,11 +7,8 @@
             <li><a ng-click="model.toBookmark()">Bookmarks ({{model.bookmark.length}})</a></li>
             <li><a ng-click="model.toReview()">Reviews ({{model.review.length}})</a></li>
         </ul>
-    </div>
-</div>
-<div class="row">
-    <div class="col-xs-12 col-md-4 col-md-offset-4">
-        <h2>Notifications:</h2>
+
+        <h4>Notifications:</h4>
         <ul class="list-group">
             <li class="list-group-item" ng-repeat="n in model.notification">
                 <div ng-switch="n.type">

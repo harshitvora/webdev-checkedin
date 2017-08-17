@@ -10,7 +10,8 @@
         model.logout = logout;
         model.followUser = followUser;
         model.unfollowUser = unfollowUser;
-        model.toFollow = toFollow;
+        model.toFollowing = toFollowing;
+        model.toFollowers = toFollowers;
         model.toReview = toReview;
 
         var userId = $routeParams["uid"];
@@ -51,6 +52,12 @@
                     model.following = response;
                 });
 
+            userService.findFollowersForUser(userId)
+                .then(function (response) {
+
+                    model.followers = response;
+                });
+
             reviewService.findReviewsForUser(userId)
                 .then(function (response) {
                     model.review = response.reverse();
@@ -65,8 +72,12 @@
                 });
         }
 
-        function toFollow() {
-            model.currentTab = "FOLLOW";
+        function toFollowing() {
+            model.currentTab = "FOLLOWING";
+        }
+
+        function toFollowers() {
+            model.currentTab = "FOLLOWERS";
         }
 
         function toReview() {
