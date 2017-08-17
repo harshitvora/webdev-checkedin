@@ -25,6 +25,7 @@
         var venueExists = false;
         var lat;
         var lng;
+        var imageUrl;
         function init() {
             model.vid = vid;
             model.bookmarked = false;
@@ -35,9 +36,11 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
-                            console.log(venue.location);
+                            console.log(venue);
                             lat = venue.location.lat;
                             lng = venue.location.lng;
+                            imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
+                            model.imageUrl = imageUrl;
                             model.mapUrl = venueService.getMapImage(lat,lng);
                             venue.location = venue.location.formattedAddress;
                             model.venue = venue;
@@ -49,6 +52,7 @@
                     model.venue = venue;
                     lat = venue.lat;
                     lng = venue.lng;
+                    model.imageUrl = venue.imageUrl;
                     model.mapUrl = venueService.getMapImage(lat,lng);
                     venueExists = true;
                     $rootScope.title = venue.name;
@@ -97,6 +101,8 @@
                         name: venue.name,
                         location: venue.location.formattedAddress,
                         rating: venue.rating,
+                        ratingColor: venue.ratingColor,
+                        imageUrl: imageUrl,
                         lat: lat,
                         lng: lng};
                     console.log(newVenue);
@@ -126,6 +132,8 @@
                         name: venue.name,
                         location: venue.location.formattedAddress,
                         rating: venue.rating,
+                        ratingColor: venue.ratingColor,
+                        imageUrl: imageUrl,
                         lat: lat,
                         lng: lng};
                     venueService.createVenue(newVenue);

@@ -11,10 +11,11 @@
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#"><span class="fa fa-search"></span> Search</a></li>
+                <li><a href="#"><span class="fa fa-search"></span> Search</a></li>
                 <li ng-show="model.user" ><a href="#!/user"><span class="fa fa-user"></span> {{model.user.username}}</a></li>
                 <li ng-show="!model.user"><a href="#!/login">Login</a></li>
                 <li ng-show="!model.user"><a href="#!/register">Register</a></li>
+                <li class="active" ng-show="model.user._venue"><a href="#!/venue/{{model.user._venue}}">Venue page</a></li>
                 <li ng-show="model.user"><a ng-click="model.logout()">Logout</a></li>
             </ul>
         </div><!--/.nav-collapse -->
@@ -24,49 +25,34 @@
     <div class="row">
 
         <div class="col-xs-12 col-md-2 col-md-offset-2 hv-container hv-margin">
-            <img class="img-responsive" src="{{model.user.pictureUrl}}">
+            <img class="img-responsive" src="{{model.imageUrl}}">
             <h4>{{model.venue.name}}</h4>
-            <h5>@{{model.user.username}}</h5>
-            {{model.user.location}}
+            <p class="btn" style="background-color: #{{model.venue.ratingColor}}">{{model.venue.rating}}</p>
+            <h4>Location:</h4>
+            {{model.venue.location}}
+            <h4>Timings:</h4>
+            {{model.venue.hours.status}}
 
-            <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}/manage" class="btn-default btn">Manage page</a>
-            <div ng-show="model.loggedin" class="form-group">
+            <a ng-show="model.user._venue" href="#!/venue/{{model.user._venue}}/manage" target="_blank" class="btn-default btn-block btn">Manage page</a>
+            <div ng-show="model.loggedin">
+                <div ng-show="!model.user._venue">
                 <hr>
-                <div ng-switch="model.bookmarked">
-                    <a ng-switch-when="false" role="button" ng-click="model.bookmarkVenue()"
+                    <a ng-show="!model.bookmarked" ng-click="model.bookmarkVenue()"
                        class="btn btn-primary btn-block">Bookmark</a>
-                    <a ng-switch-when="true" role="button" ng-click="model.unbookmarkVenue()"
+                    <a ng-show="model.bookmarked" ng-click="model.unbookmarkVenue()"
                        class="btn btn-danger btn-block">Remove bookmark</a>
-                </div>
-            </div>
-            <div ng-show="model.loggedin" class="form-group">
-                <div ng-switch="model.checkedIn">
-                    <a ng-switch-when="false" role="button" ng-click="model.checkIn()"
+                    <a ng-show="!model.checkedIn" ng-click="model.checkIn()"
                        class="btn btn-primary btn-block">CheckIn</a>
-                    <p ng-switch-when="true"><i>CheckedIn here!</i></p>
+                    <p ng-show="model.checkedIn"><i>CheckedIn here!</i></p>
                 </div>
-
             </div>
         </div>
         <div class="col-xs-12 col-md-6">
             <div class="row">
-                <div class="col-xs-12 hv-container">
+                <div class="col-xs-12 hv-container-map">
                     <img src="{{model.mapUrl}}" class="img-responsive">
                 </div>
             </div>
-
-            <div class="row hv-spacing"></div>
-            <div class="row">
-                <div class="col-xs-12 hv-container">
-                    <h4>Location:</h4>
-                    {{model.venue.location}}
-                    <h4>Timings:</h4>
-                    {{model.venue.hours.status}}
-                    <h4>Rating:</h4>
-                    {{model.venue.rating}}
-                </div>
-            </div>
-
             <div class="row hv-spacing"></div>
             <div class="row">
                 <div ng-show="model.venue.offerText" class="col-xs-12 hv-container">
@@ -136,7 +122,8 @@
                     </li>
                 </ul>
 
-                    <div ng-show="!model.venue._manager"><small>Do you work at <b>{{model.venue.name}}</b>? Register <a href="#!/register/{{model.vid}}">here</a> as a manager to manage this page and post offers!</small></div>
+                    <div ng-show="!model.venue._manager"><small>Do you work at <b>{{model.venue.name}}</b>?
+                        Register <a href="#!/register/{{model.vid}}">here</a> as a manager to manage this page and post offers!</small></div>
                 </div>
             </div>
         </div>
