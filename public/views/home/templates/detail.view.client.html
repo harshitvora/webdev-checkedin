@@ -69,7 +69,7 @@
             </div>
             <div class="row hv-spacing" ng-show="model.venue.offerText"></div>
             <div class="row">
-                <div ng-show="model.loggedin" ng-hide="model.isManager" class="col-xs-12 hv-container">
+                <div ng-show="model.loggedin" class="col-xs-12 hv-container">
                     <div ng-show="!model.userReview">
                         <label for="title">Write a Review:</label><br>
                         <ng-rating ng-model="model.newReview.rating" editable="true"></ng-rating>
