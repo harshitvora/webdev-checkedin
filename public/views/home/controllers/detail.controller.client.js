@@ -37,7 +37,6 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
-                            console.log(venue);
                             lat = venue.location.lat;
                             lng = venue.location.lng;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
@@ -46,6 +45,7 @@
                             venue.location = venue.location.formattedAddress;
                             venue.contact = venue.contact.formattedPhone;
                             venue.price = venue.price.currency;
+                            venue.website = venue.url;
                             model.venue = venue;
                             $rootScope.title = venue.name;
                         });

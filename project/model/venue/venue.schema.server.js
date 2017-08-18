@@ -19,10 +19,6 @@ var venueSchema = mongoose.Schema({
     price: String,
     contact: String,
     url: String
-    // pictureUrl: String,
-    // following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
-    // bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],
-    // dateCreated: {type: Date, default: Date.now}
 }, {collection: "venue", _id: false});
 
 module.exports = venueSchema;
