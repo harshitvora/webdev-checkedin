@@ -20,18 +20,14 @@
         this.findVenuesForUser = findVenuesForUser;
 
 
-        var CLIENT_ID = "O0RQ5MCQRO0CXOWBQSSE5JXLLCO1M0L51NOEJH23YTNNX05B";
+        var FOURSQUARE_CLIENT_ID = process.env.FOURSQUARE_CLIENT_ID;
 
-        var CLIENT_SECRET = "3UGFREITEOYUFAT0I2FK0YDL2SHDPS0IQEDMAN1F2FOGSD3I";
+        var FOURSQUARE_CLIENT_SECRET = process.env.FOURSQUARE_CLIENT_SECRET;
 
-        var GEO_API_KEY = "AIzaSyDmjkyUIuqFhtjJHInVo848M68jhB4fWxA";
-
-        var GEO_URL = "https://www.googleapis.com/geolocation/v1/geolocate?key=YOUR_API_KEY";
-
-
+        var GEO_API_KEY = process.env.GEO_API_KEY;
 
         function searchVenueByName(location, name) {
-            var url = "https://api.foursquare.com/v2/venues/search?near="+location+"&query="+name+"&intent=checkin&client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";
+            var url = "https://api.foursquare.com/v2/venues/search?near="+location+"&query="+name+"&intent=checkin&client_id="+FOURSQUARE_CLIENT_ID+"&client_secret="+FOURSQUARE_CLIENT_SECRET+"&v=20170801";
             return $http.get(url).then(function (response) {
                 return response.data;
             });
