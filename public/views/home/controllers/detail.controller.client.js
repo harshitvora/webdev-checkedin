@@ -37,12 +37,15 @@
                     venueService.searchVenueById(vid)
                         .then(function (response) {
                             venue = response.response.venue;
+                            console.log(venue);
                             lat = venue.location.lat;
                             lng = venue.location.lng;
                             imageUrl = venue.bestPhoto.prefix +"300x300"+venue.bestPhoto.suffix;
                             model.imageUrl = imageUrl;
                             model.mapUrl = venueService.getMapImage(lat,lng);
                             venue.location = venue.location.formattedAddress;
+                            venue.contact = venue.contact.formattedPhone;
+                            venue.price = venue.price.currency;
                             model.venue = venue;
                             $rootScope.title = venue.name;
                         });
@@ -103,7 +106,10 @@
                         location: venue.location.formattedAddress,
                         rating: venue.rating,
                         ratingColor: venue.ratingColor,
+                        contact: venue.contact.formattedPhone,
                         imageUrl: imageUrl,
+                        price: venue.price.currency,
+                        url: venue.url,
                         lat: lat,
                         lng: lng};
                     venueService.createVenue(newVenue);
@@ -135,7 +141,10 @@
                         location: venue.location.formattedAddress,
                         rating: venue.rating,
                         ratingColor: venue.ratingColor,
+                        contact: venue.contact.formattedPhone,
                         imageUrl: imageUrl,
+                        price: venue.price.currency,
+                        url: venue.url,
                         lat: lat,
                         lng: lng
                     };

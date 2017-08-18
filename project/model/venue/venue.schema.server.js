@@ -16,8 +16,9 @@ var venueSchema = mongoose.Schema({
     offerText : String,
     lat: String,
     lng: String,
-    // email: String,
-    // phone: String,
+    price: String,
+    contact: String,
+    url: String
     // pictureUrl: String,
     // following: [{type: mongoose.Schema.Types.ObjectId, ref:'UserModel'}],
     // bookmarks: [{type: mongoose.Schema.Types.ObjectId, ref:'VenueModel'}],

@@ -31,6 +31,12 @@
             <div ng-repeat="line in model.venue.location">{{line}}</div>
             <h5 ng-show="model.venue.hours.status">Timings:</h5>
             {{model.venue.hours.status}}
+            <h5 ng-show="model.venue.contact">Contact:</h5>
+            {{model.venue.contact}}
+            <h5 ng-show="model.venue.price">Price:</h5>
+            {{model.venue.price}}
+            <h5 ng-show="model.venue.url">Website:</h5>
+            <a href="{{model.venue.url}}">Click here!</a>
 
 
             <a ng-show="model.isManager" href="#!/venue/{{model.user._venue}}/manage" target="_blank" class="btn-default btn-block btn">Manage page</a>
