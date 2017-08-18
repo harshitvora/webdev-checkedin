@@ -34,7 +34,7 @@
         }
 
         function searchVenueById(id) {
-            var url = "https://api.foursquare.com/v2/venues/"+id+"?client_id="+CLIENT_ID+"&client_secret="+CLIENT_SECRET+"&v=20170801";
+            var url = "https://api.foursquare.com/v2/venues/"+id+"?client_id="+FOURSQUARE_CLIENT_ID+"&client_secret="+FOURSQUARE_CLIENT_SECRET+"&v=20170801";
             return $http.get(url).then(function (response) {
                 return response.data;
             });
