@@ -59,7 +59,8 @@
                 <div ng-show="result"><h4>Search results:</h4>
                     <ul class="list-group">
                         <li class="list-group-item" ng-repeat="val in result.response.venues">
-                            <a href="#!/venue/{{val.id}}">{{val.name}}</a>
+                            <a href="#!/venue/{{val.id}}">{{val.name}}</a><br>
+                            <div ng-repeat="line in val.location.formattedAddress">{{line}}</div>
                         </li>
                     </ul></div>
 
