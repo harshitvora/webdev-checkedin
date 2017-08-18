@@ -25,21 +25,24 @@
     <div class="row">
         <div class="col-xs-12 col-md-6 col-md-offset-3 hv-container">
             <label for="review"><h4>Post Offer:</h4></label>
-                    <input type="text"
-                           name="title"
-                           id="review"
-                           ng-model="model.venue.offerTitle"
-                           placeholder="Title"
-                           class="form-control">
-                    <input type="text"
-                           name="text"
-                           ng-model="model.venue.offerText"
-                           placeholder="Say something about this place!"
-                           class="form-control">
-                    <a role="button" ng-click="model.updateOffer(model.venue)"
-                       class="btn btn-primary btn-block">Update</a>
-                    <a role="button" ng-click="model.deleteOffer()"
-                       class="btn btn-danger btn-block">Delete</a>
+            <div ng-show="model.errorMessage" class="alert alert-danger">
+                {{model.errorMessage}}
+            </div>
+            <input type="text"
+                   name="title"
+                   id="review"
+                   ng-model="model.venue.offerTitle"
+                   placeholder="Title"
+                   class="form-control">
+            <input type="text"
+                   name="text"
+                   ng-model="model.venue.offerText"
+                   placeholder="Say something about this place!"
+                   class="form-control">
+            <a role="button" ng-click="model.updateOffer(model.venue)"
+               class="btn btn-primary btn-block">Update</a>
+            <a role="button" ng-click="model.deleteOffer()"
+               class="btn btn-danger btn-block">Delete</a>
         </div>
     </div>
     <div class="row hv-spacing"></div>

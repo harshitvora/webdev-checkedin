@@ -96,7 +96,6 @@
         }
 
         function bookmarkVenue() {
-
             venueService.findVenueByVenueId(vid).then(function (response) {
                 if(!response){
                     var newVenue = {_id: vid,
@@ -127,30 +126,38 @@
         }
 
         function createReview(review) {
+
             venueService.findVenueByVenueId(vid).then(function (response) {
-                if(!response){
-                    var newVenue = {_id: vid,
+                if (!response) {
+                    var newVenue = {
+                        _id: vid,
                         name: venue.name,
                         location: venue.location.formattedAddress,
                         rating: venue.rating,
                         ratingColor: venue.ratingColor,
                         imageUrl: imageUrl,
                         lat: lat,
-                        lng: lng};
+                        lng: lng
+                    };
                     venueService.createVenue(newVenue);
                 }
             });
 
-            var notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
 
-            notificationService.createNotification(notification);
+            if (review === undefined || review.title === undefined || review.text === undefined || review.rating === undefined) {
+                model.errorMessage = "Enter all fields!";
+            } else {
+                var notification = {type: "REVIEW", _user: currentUser._id, _venue: vid};
 
-            review._user = currentUser._id;
-            review._venue = vid;
-            review.venueName = venue.name;
-            reviewService.createReview(review).then(function (response) {
-                $route.reload();
-            });
+                notificationService.createNotification(notification);
+
+                review._user = currentUser._id;
+                review._venue = vid;
+                review.venueName = venue.name;
+                reviewService.createReview(review).then(function (response) {
+                    $route.reload();
+                });
+            }
         }
 
         function updateReview(review) {

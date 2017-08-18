@@ -100,11 +100,15 @@
         }
 
         function updateOffer(newVenue) {
-            venue.offerTitle = newVenue.offerTitle;
-            venue.offerText = newVenue.offerText;
-            venueService.updateVenue(vid, venue).then(function (response) {
-                $route.reload();
-            })
+            if(newVenue === undefined || newVenue.offerTitle === undefined || newVenue.offerText === undefined){
+                model.errorMessage = "Enter all fields!";
+            } else {
+                venue.offerTitle = newVenue.offerTitle;
+                venue.offerText = newVenue.offerText;
+                venueService.updateVenue(vid, venue).then(function (response) {
+                    $route.reload();
+                })
+            }
         }
 
         function deleteOffer() {

@@ -62,56 +62,66 @@
         init();
 
         function register(user) {
-            userService.findUserByUsername(user.username)
-                .then(function (response) {
-                    var _user = response;
-                    if(!_user){
-                        if(user.password === user.verifyPassword){
-                            var newUser = {username: user.username, password: user.password, role:  "MANAGER", _venue: vid};
-                            return userService.createUser(newUser);
+            if(user === undefined || user.password === undefined || user.username === undefined || user.verifyPassword === undefined){
+                model.errorMessage = "Enter all fields!";
+            } else {
+                userService.findUserByUsername(user.username)
+                    .then(function (response) {
+                        var _user = response;
+                        if (!_user) {
+                            if (user.password === user.verifyPassword) {
+                                var newUser = {
+                                    username: user.username,
+                                    password: user.password,
+                                    role: "MANAGER",
+                                    _venue: vid
+                                };
+                                return userService.createUser(newUser);
+                            }
+                            else {
+                                model.error = "Passwords do not match!";
+                            }
                         }
                         else {
-                            model.error = "Passwords do not match!";
+                            model.error = "User already exists!";
                         }
-                    }
-                    else{
-                        model.error = "User already exists!";
-                    }
-                    return;
-                })
-                .then(function (response) {
-                    var newUser = response;
-                    if(venueExists){
-                        venue._manager = newUser._id;
-                        venueService.updateVenue(vid, venue).then(function (response) {
-                            if(newUser){
-                                login(user);
-                            }
-                            return;
-                        });
-                    } else {
-                        var newVenue = {_id: vid,
-                            name: venue.name,
-                            location: venue.location.formattedAddress,
-                            rating: venue.rating,
-                            ratingColor: venue.ratingColor,
-                            _manager: newUser._id,
-                            imageUrl: imageUrl,
-                            lat: lat,
-                            lng: lng};
-                        venueService.createVenue(newVenue).then(function (response) {
-                            if(newUser){
-                                login(user);
-                            }
-                            return;
-                        })
-                    }
+                        return;
+                    })
+                    .then(function (response) {
+                        var newUser = response;
+                        if (venueExists) {
+                            venue._manager = newUser._id;
+                            venueService.updateVenue(vid, venue).then(function (response) {
+                                if (newUser) {
+                                    login(user);
+                                }
+                                return;
+                            });
+                        } else {
+                            var newVenue = {
+                                _id: vid,
+                                name: venue.name,
+                                location: venue.location.formattedAddress,
+                                rating: venue.rating,
+                                ratingColor: venue.ratingColor,
+                                _manager: newUser._id,
+                                imageUrl: imageUrl,
+                                lat: lat,
+                                lng: lng
+                            };
+                            venueService.createVenue(newVenue).then(function (response) {
+                                if (newUser) {
+                                    login(user);
+                                }
+                                return;
+                            })
+                        }
 
-                });
+                    });
+            }
         }
 
         function registerManager() {
-            console.log(currentUser);
             currentUser.role = "MANAGER";
             currentUser._venue = vid;
             userService.updateUser(currentUser._id, currentUser)

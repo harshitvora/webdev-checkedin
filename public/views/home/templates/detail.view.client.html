@@ -65,6 +65,9 @@
                 <div ng-show="model.loggedin" class="col-xs-12 hv-container">
                     <div ng-show="!model.userReview">
                         <label for="title">Write a Review:</label><br>
+                        <div ng-show="model.errorMessage" class="alert alert-danger">
+                            {{model.errorMessage}}
+                        </div>
                         <ng-rating ng-model="model.newReview.rating" editable="true"></ng-rating>
                         <div class="form-group">
                             <input type="text"

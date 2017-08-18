@@ -15,28 +15,43 @@
         init();
 
         function register(user) {
-            userService.findUserByUsername(user.username)
-                .then(function (response) {
-                    if(!response){
-                        if(user.password === user.verifyPassword){
-                            var newUser = {username: user.username, password: user.password, firstName: user.firstName, lastName: user.lastName, role:"USER"};
-                            return userService.createUser(newUser);
+            if (user === undefined ||
+                user.password === undefined ||
+                user.username === undefined ||
+                user.verifyPassword === undefined ||
+                user.firstName === undefined ||
+                user.lastName === undefined) {
+                model.errorMessage = "Enter all fields!";
+            } else {
+                userService.findUserByUsername(user.username)
+                    .then(function (response) {
+                        if (!response) {
+                            if (user.password === user.verifyPassword) {
+                                var newUser = {
+                                    username: user.username,
+                                    password: user.password,
+                                    firstName: user.firstName,
+                                    lastName: user.lastName,
+                                    role: "USER"
+                                };
+                                return userService.createUser(newUser);
+                            }
+                            else {
+                                model.error = "Passwords do not match!";
+                            }
                         }
                         else {
-                            model.error = "Passwords do not match!";
+                            model.error = "User already exists!";
                         }
-                    }
-                    else{
-                        model.error = "User already exists!";
-                    }
-                    return;
-                })
-                .then(function (response) {
-                    if(response){
-                        login(user);
-                    }
-                    return;
-                });
+                        return;
+                    })
+                    .then(function (response) {
+                        if (response) {
+                            login(user);
+                        }
+                        return;
+                    });
+            }
         }
 
         function login(user) {
