@@ -25,10 +25,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-md-2 col-md-offset-2 hv-container hv-margin">
-            <img class="img-responsive" src="{{model.user.pictureUrl}}">
+            <div class="img-thumbnail"><img class="img-responsive" src="{{model.user.pictureUrl}}"></div>
             <h4>{{model.user.firstName}} {{model.user.lastName}}</h4>
             <h5>@{{model.user.username}}</h5>
-            {{model.user.location}}
+            {{model.user.location}}<br>
             Status: <i>{{model.user.status}}</i>
             <hr>
             <div ng-switch="model.followed">
