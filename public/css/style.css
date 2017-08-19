@@ -21,6 +21,16 @@ a:hover{
     margin: auto;
 }
 
+.hv-bgimg {
+    position: fixed;
+    left:0;
+    right: 0;
+    top:0;
+    bottom: 0;
+    background-size: cover;
+    background-image: url('../uploads/bg.png');
+}
+
 input{
     margin-bottom: 5px;
 }
