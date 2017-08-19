@@ -38,7 +38,7 @@ input{
 body{
     padding-top: 80px;
     padding-bottom: 15px;
-    background-color: #d3ecff;
+    background-color: #2C5A71;
 }
 
 .hv-glyphicon{
@@ -54,7 +54,7 @@ body{
 }
 
 .hv-container{
-    background-color: white;
+    background-color: #d3ecff;
     padding: 25px;
 }
 
